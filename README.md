@@ -218,12 +218,12 @@ http://localhost:3000
 
 ## 👥 Thành viên nhóm
 
-| STT | Họ và tên    | Vai trò  |
-| --- | ------------ | -------- |
-| 1   | Nguyễn Văn A | Frontend |
-| 2   | Nguyễn Văn B | Backend  |
-| 3   | Nguyễn Văn C | Database |
-| 4   | Nguyễn Văn D | UI/UX    |
+| STT | Họ và tên | Vai trò | Nhiệm vụ chính |
+| :---: | :--- | :--- | :--- |
+| 1 | **Nguyễn Nhật Bảo Lâm** | Nhóm trưởng (Leader) | Quản lý dự án, Review/Merge PR, Backend & Database |
+| 2 | **Mai Huy Phong** | Thành viên (Member) | Thiết kế UI/UX, Responsive CSS Design System |
+| 3 | **Lê Nhật Duy** | Thành viên (Member) | Cấu trúc Semantic HTML, Xử lý tương tác JavaScript & DOM |
+| 4 | **Vũ Minh Tiến** | Thành viên (Member) | Kiểm thử (Testing), Tối ưu hiệu năng & Tài liệu dự án |
 
 ---
 
