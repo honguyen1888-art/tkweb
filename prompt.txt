@@ -1,0 +1,59 @@
+================================================================================
+                    NHẬT KÝ PROMPT AI - TUẦN 1
+        Học phần: AI Web Development (Nhập Môn & Hệ Sinh Thái AI)
+        Đề tài: Website Thương Mại Điện Tử (TechStore)
+        Nhóm sinh viên thực hiện:
+        1. Nguyễn Nhật Bảo Lâm (Leader)
+        2. Mai Huy Phong (Member)
+        3. Lê Nhật Duy (Member)
+        4. Vũ Minh Tiến (Member)
+================================================================================
+
+[PROMPT 1] - KHỞI TẠO Ý TƯỞNG & PHÂN RÃ DỰ ÁN (PROJECT DECOMPOSITION)
+--------------------------------------------------------------------------------
+Bối cảnh: Dự án bài tập lớn nhóm môn Thiết kế & Lập trình Web.
+Đề tài: Website Thương mại Điện tử / Bán hàng trực tuyến (E-commerce Website).
+Yêu cầu:
+1. Phân rã bài toán website thương mại điện tử thành các module người dùng và quản trị viên.
+2. Đề xuất cấu trúc thư mục dự án chuẩn dành cho lập trình viên Web hiện đại.
+3. Thiết kế mô hình cơ sở dữ liệu quan hệ (ERD logic) gồm các bảng: users, categories, products, orders, order_details, cart.
+
+[PROMPT 2] - THIẾT KẾ CẤU TRÚC THƯ MỤC CHUẨN (SCAFFOLDING)
+--------------------------------------------------------------------------------
+Yêu cầu: 
+Hãy tạo cấu trúc cây thư mục sạch, module hóa cho dự án Website bán hàng với HTML5, CSS3, JavaScript:
+- assets/: Chứa tài nguyên tĩnh (css/, js/, images/, fonts/).
+- components/: Chứa các thành phần giao diện tái sử dụng (header, footer, product-card, navbar).
+- pages/: Chứa các trang chức năng (home, products, product-detail, cart, checkout, auth).
+- admin/: Khu vực quản trị.
+- database/: Chứa script khởi tạo cơ sở dữ liệu.
+- README.md: Tài liệu đặc tả dự án.
+- prompt.txt: Nhật ký lưu trữ prompt.
+
+[PROMPT 3] - XÂY DỰNG KHUNG HTML5 SEMANTIC (XƯƠNG DỰ ÁN)
+--------------------------------------------------------------------------------
+Yêu cầu:
+Viết mã nguồn index.html cho trang chủ Website thương mại điện tử:
+- Tuân thủ chuẩn Semantic HTML5: sử dụng các thẻ <header>, <nav>, <main>, <section>, <article>, <aside>, <footer>.
+- Thân thiện với SEO và Accessibility (ARIA labels, alt text, meta viewport responsive).
+- Tích hợp liên kết tới CSS Design System và file JavaScript xử lý tương tác.
+- Cấu trúc các khối: Header & Top Nav -> Hero Banner -> Danh mục nổi bật (Categories) -> Sản phẩm bán chạy (Featured Products) -> Cam kết dịch vụ (Features/Benefits) -> Footer.
+
+[PROMPT 4] - THIẾT LẬP HỆ THỐNG CSS DESIGN SYSTEM & RESET (DA DỰ ÁN)
+--------------------------------------------------------------------------------
+Yêu cầu:
+Viết file assets/css/style.css thiết lập nền tảng giao diện:
+- Sử dụng CSS Custom Properties (CSS Variables) cho bảng màu (:root { --primary-color, --secondary-color, --bg-color, --text-color, --border-radius, --transition }).
+- Hỗ trợ biến sẵn sàng cho tính năng Dark/Light Mode sau này.
+- Modern CSS Reset để chuẩn hóa hiển thị trên mọi trình duyệt.
+- Xây dựng hệ thống Grid & Flexbox cơ bản cho Header, Container, Product Grid card.
+
+[PROMPT 5] - KHỞI TẠO KHUNG JAVASCRIPT & STATE QUẢN LÝ TƯƠNG TÁC (LINH HỒN DỰ ÁN)
+--------------------------------------------------------------------------------
+Yêu cầu:
+Viết file assets/js/main.js với các tính năng khởi tạo:
+- Khởi tạo lắng nghe sự kiện khi DOM ready (DOMContentLoaded).
+- Quản lý trạng thái giỏ hàng cơ bản (Mock Cart State lưu trong LocalStorage).
+- Xử lý tương tác menu mobile (Toggle Navigation Drawer).
+- Thông báo Toast đơn giản khi người dùng thêm sản phẩm vào giỏ hàng.
+================================================================================

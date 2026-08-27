@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TechStore - Website Thương mại điện tử chuyên cung cấp thiết bị công nghệ chính hãng, bảo hành toàn diện.">
+  <title>TechStore - Thế Giới Công Nghệ AI</title>
+  
+  <!-- CSS Design System -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- ==================== HEADER & NAVIGATION ==================== -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <!-- Logo -->
+        <a href="index.html" class="brand-logo" aria-label="Trang chủ TechStore">
+          <span>⚡</span> TechStore
+        </a>
+        
+        <!-- Main Nav -->
+        <nav class="main-nav" aria-label="Điều hướng chính">
+          <ul>
+            <li><a href="index.html" class="nav-link active">Trang Chủ</a></li>
+            <li><a href="pages/products/index.html" class="nav-link">Sản Phẩm</a></li>
+            <li><a href="pages/cart/index.html" class="nav-link">Giỏ Hàng</a></li>
+            <li><a href="admin/dashboard/index.html" class="nav-link">Quản Trị</a></li>
+          </ul>
+        </nav>
+
+        <!-- Actions -->
+        <div class="header-actions">
+          <button id="theme-toggle" class="icon-btn" aria-label="Đổi chế độ sáng tối">🌙</button>
+          <a href="pages/login/index.html" class="icon-btn" aria-label="Tài khoản">👤</a>
+          <a href="pages/cart/index.html" class="icon-btn" aria-label="Giỏ hàng">
+            🛒
+            <span class="cart-badge">0</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="container">
+    
+    <!-- Hero Banner -->
+    <section class="hero-section" aria-label="Banner nổi bật">
+      <div class="hero-content">
+        <span class="hero-badge">🚀 Kỷ nguyên AI Web 2026</span>
+        <h1 class="hero-title">Khám Phá Công Nghệ Đỉnh Cao</h1>
+        <p class="hero-subtitle">Trải nghiệm mua sắm thiết bị thông minh với ưu đãi lên tới 30% và hỗ trợ trả góp 0% lãi suất.</p>
+        <a href="#products-section" class="btn-primary">
+          <span>Mua Sắm Ngay</span>
+          <span>→</span>
+        </a>
+      </div>
+      <div class="hero-visual" style="font-size: 6rem;">
+        🤖
+      </div>
+    </section>
+
+    <!-- Category Pills -->
+    <section class="category-section" aria-label="Danh mục sản phẩm">
+      <div class="category-list">
+        <button class="category-pill active" data-category="all">✨ Tất Cả</button>
+        <button class="category-pill" data-category="laptop">💻 Laptop</button>
+        <button class="category-pill" data-category="phone">📱 Điện Thoại</button>
+        <button class="category-pill" data-category="audio">🎧 Tai Nghe</button>
+        <button class="category-pill" data-category="watch">⌚ Đồng Hồ</button>
+        <button class="category-pill" data-category="accessory">⌨️ Phụ Kiện</button>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="products-section" class="products-section" aria-label="Danh sách sản phẩm">
+      <div class="section-header">
+        <h2 class="section-title">Sản Phẩm Nổi Bật</h2>
+      </div>
+      
+      <!-- Product Grid (Populated dynamically by JS) -->
+      <div id="product-grid-container" class="product-grid">
+        <!-- Rendered via assets/js/main.js -->
+      </div>
+    </section>
+
+    <!-- Services / Benefits -->
+    <section class="benefits-section" aria-label="Lợi ích khách hàng">
+      <article class="benefit-card">
+        <div class="benefit-icon">🚚</div>
+        <h3 class="benefit-title">Giao Hàng Siêu Tốc</h3>
+        <p class="benefit-desc">Miễn phí vận chuyển toàn quốc cho đơn từ 500k</p>
+      </article>
+      <article class="benefit-card">
+        <div class="benefit-icon">🛡️</div>
+        <h3 class="benefit-title">Bảo Hành Chính Hãng</h3>
+        <p class="benefit-desc">Cam kết 100% hàng chính hãng, đổi mới 30 ngày</p>
+      </article>
+      <article class="benefit-card">
+        <div class="benefit-icon">💳</div>
+        <h3 class="benefit-title">Thanh Toán An Toàn</h3>
+        <p class="benefit-desc">Hỗ trợ đa dạng phương thức thanh toán bảo mật</p>
+      </article>
+      <article class="benefit-card">
+        <div class="benefit-icon">💬</div>
+        <h3 class="benefit-title">Hỗ Trợ 24/7</h3>
+        <p class="benefit-desc">Đội ngũ kỹ thuật viên AI hỗ trợ tức thì</p>
+      </article>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3 style="color:#ffffff; margin-bottom:12px;">⚡ TechStore</h3>
+          <p style="font-size:0.875rem; line-height:1.6;">Dự án thực hành môn Thiết kế & Lập trình Web - Học phần AI Web Development.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Danh Mục</h4>
+          <ul>
+            <li><a href="#">Laptop & PC</a></li>
+            <li><a href="#">Điện Thoại</a></li>
+            <li><a href="#">Phụ Kiện Thông Minh</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Hỗ Trợ</h4>
+          <ul>
+            <li><a href="#">Chính Sách Bảo Hành</a></li>
+            <li><a href="#">Hướng Dẫn Mua Hàng</a></li>
+            <li><a href="#">Quy Định Đổi Trả</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Thành Viên Nhóm</h4>
+          <ul>
+            <li>Nguyễn Nhật Bảo Lâm</li>
+            <li>Mai Huy Phong</li>
+            <li>Lê Nhật Duy</li>
+            <li>Vũ Minh Tiến</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 TechStore. Thực hiện bởi Nhóm sinh viên AI Web Development.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
