@@ -1,0 +1,192 @@
+{
+  "pages": [
+    {
+      "page": "index.html",
+      "status": "PASS",
+      "title": "SkyWings - Sẵn Sàng Cất Cánh | Đặt Vé Máy Bay Trực Tuyến",
+      "errors": [],
+      "http404s": [],
+      "details": {
+        "title": "SkyWings - Sẵn Sàng Cất Cánh | Đặt Vé Máy Bay Trực Tuyến",
+        "hasHeader": true,
+        "hasFooter": true,
+        "theme": "light",
+        "hasHero": true,
+        "hasSearchCard": true,
+        "themeToggleBtn": true,
+        "themeAfterClick": "dark",
+        "tabSwitchTested": true
+      }
+    },
+    {
+      "page": "pages/flights.html",
+      "status": "PASS",
+      "title": "10 Chuyến Bay Phù Hợp Nhất - SkyWings",
+      "errors": [],
+      "http404s": [],
+      "details": {
+        "title": "10 Chuyến Bay Phù Hợp Nhất - SkyWings",
+        "hasHeader": true,
+        "hasFooter": true,
+        "theme": "light",
+        "flightCardsCount": 10,
+        "filterTabs": 4,
+        "airlineCheckboxes": 10,
+        "sortTested": true
+      }
+    },
+    {
+      "page": "pages/booking.html",
+      "status": "PASS",
+      "title": "Chi Tiết Chuyến Bay & Đặt Chỗ - SkyWings",
+      "errors": [],
+      "http404s": [],
+      "details": {
+        "title": "Chi Tiết Chuyến Bay & Đặt Chỗ - SkyWings",
+        "hasHeader": true,
+        "hasFooter": true,
+        "theme": "light",
+        "formPresent": true,
+        "nameInput": true,
+        "emailInput": true,
+        "phoneInput": true,
+        "btnProceed": true
+      }
+    },
+    {
+      "page": "pages/seats.html",
+      "status": "PASS",
+      "title": "Chọn Chỗ Ngồi Trên Máy Bay - SkyWings",
+      "errors": [],
+      "http404s": [],
+      "details": {
+        "title": "Chọn Chỗ Ngồi Trên Máy Bay - SkyWings",
+        "hasHeader": true,
+        "hasFooter": true,
+        "theme": "light",
+        "cabinBox": false,
+        "seatCount": 39,
+        "freeSeatCount": 29,
+        "proceedBtn": true,
+        "seatClicked": true
+      }
+    },
+    {
+      "page": "pages/payment.html",
+      "status": "PASS",
+      "title": "Chi Tiết Thanh Toán - SkyWings",
+      "errors": [],
+      "http404s": [],
+      "details": {
+        "title": "Chi Tiết Thanh Toán - SkyWings",
+        "hasHeader": true,
+        "hasFooter": true,
+        "theme": "light",
+        "paymentTabs": 4,
+        "creditCardMockup": true,
+        "cardHolderInput": true,
+        "cardExpInput": true,
+        "cardCvvInput": true,
+        "btnConfirmPay": true,
+        "vnpayTabClicked": true
+      }
+    },
+    {
+      "page": "pages/ticket.html",
+      "status": "PASS",
+      "title": "Thẻ Lên Tàu Bay (Boarding Pass) - SkyWings",
+      "errors": [],
+      "http404s": [],
+      "details": {
+        "title": "Thẻ Lên Tàu Bay (Boarding Pass) - SkyWings",
+        "hasHeader": true,
+        "hasFooter": true,
+        "theme": "light",
+        "boardingPass": true,
+        "pnrDisplay": true,
+        "airlineLogo": true,
+        "barcode": true,
+        "qrCode": true,
+        "btnCopyPnr": true
+      }
+    },
+    {
+      "page": "pages/login.html",
+      "status": "PASS",
+      "title": "Đăng Nhập Tài Khoản - SkyWings",
+      "errors": [],
+      "http404s": [],
+      "details": {
+        "title": "Đăng Nhập Tài Khoản - SkyWings",
+        "hasHeader": true,
+        "hasFooter": true,
+        "theme": "light",
+        "emailField": true,
+        "passwordField": true,
+        "submitBtn": true
+      }
+    },
+    {
+      "page": "pages/register.html",
+      "status": "PASS",
+      "title": "Đăng Ký Tài Khoản - SkyWings",
+      "errors": [],
+      "http404s": [],
+      "details": {
+        "title": "Đăng Ký Tài Khoản - SkyWings",
+        "hasHeader": true,
+        "hasFooter": true,
+        "theme": "light",
+        "nameField": true,
+        "emailField": true,
+        "phoneField": true,
+        "passwordField": true,
+        "termsCheckbox": true
+      }
+    },
+    {
+      "page": "admin/index.html",
+      "status": "PASS",
+      "title": "SkyWings Admin - Bảng Điều Khiển Vận Hành Hàng Không",
+      "errors": [],
+      "http404s": [],
+      "details": {
+        "title": "SkyWings Admin - Bảng Điều Khiển Vận Hành Hàng Không",
+        "hasHeader": true,
+        "hasFooter": false,
+        "theme": "light",
+        "hasHero": false,
+        "hasSearchCard": false,
+        "themeToggleBtn": true,
+        "themeAfterClick": "dark",
+        "tabSwitchTested": true
+      }
+    }
+  ],
+  "funnel": [
+    {
+      "step": "1. Index Search Flight",
+      "result": "PASS"
+    },
+    {
+      "step": "2. Select Flight Card",
+      "result": "PASS"
+    },
+    {
+      "step": "3. Booking Passenger Form",
+      "result": "PASS"
+    },
+    {
+      "step": "4. Seat Map Selection",
+      "result": "PASS"
+    },
+    {
+      "step": "5. Payment Gateway Verification",
+      "result": "PASS"
+    },
+    {
+      "step": "6. E-Ticket Boarding Pass Issuance",
+      "result": "PASS"
+    }
+  ]
+}

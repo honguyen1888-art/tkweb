@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyWings Admin - Bảng Điều Khiển Vận Hành Hàng Không</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <!-- Phông chữ tiếng Việt chuẩn đẹp số 1: Be Vietnam Pro -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="ngefly-header">
+    <div class="container" style="max-width: 100%; padding: 0 2rem;">
+      <div class="navbar-inner">
+        <a href="../index.html" class="logo-wrap" aria-label="SkyWings Quản Trị">
+          <span class="logo-icon-svg">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
+            </svg>
+          </span>
+          <span class="logo-brand">Sky<span class="logo-accent">Wings</span> <strong style="font-size: 0.95rem; margin-left: 0.35rem; color: var(--accent-orange);">Quản Trị</strong></span>
+        </a>
+        <nav aria-label="Điều hướng quản trị">
+          <ul class="nav-links">
+            <li class="nav-item"><a href="../index.html">Trang Chủ</a></li>
+            <li class="nav-item"><a href="../pages/flights.html">Chuyến Bay</a></li>
+            <li class="nav-item"><a href="../pages/flights.html?view=schedule">Lịch Trình</a></li>
+            <li class="nav-item"><a href="../pages/booking.html">Đặt Chỗ</a></li>
+            <li class="nav-item"><a href="../pages/ticket.html">Vé Của Bạn</a></li>
+            <li class="nav-item"><a href="index.html" class="active" style="color: var(--accent-orange); font-weight: 800;">Quản Trị</a></li>
+          </ul>
+        </nav>
+        <div class="header-right">
+          <a href="../pages/flights.html" class="btn-nav-search" title="Tìm kiếm chuyến bay" aria-label="Tìm kiếm">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </a>
+          <button id="theme-toggle-btn" class="btn-theme-toggle" title="Đổi giao diện Sáng / Tối" aria-label="Đổi chế độ sáng tối">🌙</button>
+          <a href="../index.html" class="btn-signin" style="border: 1px solid var(--border-subtle);">Xem Trang Web ➔</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="admin-layout-grid">
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar-nav">
+      <ul class="admin-nav-list">
+        <li><a href="index.html" class="active">📊 Tổng Quan</a></li>
+        <li><a href="#flights">🛫 Lịch Trình Bay</a></li>
+        <li><a href="#orders">🎫 Đơn Đặt Vé & PNR</a></li>
+        <li><a href="#airports">🏢 Sân Bay & Cửa Khởi Hành</a></li>
+        <li><a href="#passengers">👥 Quản Lý Hành Khách</a></li>
+        <li><a href="#settings">⚙️ Cài Đặt Hệ Thống</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main-area">
+
+      <!-- TOP OPERATIONS COMMAND BANNER (AOCC) -->
+      <div class="sky-clouds-banner-wrap admin-sky-banner" id="admin-animated-banner">
+        <!-- Left Side: Operation Status & Telemetry -->
+        <div class="admin-banner-left">
+          <div class="flights-flight-status-badge" style="background: rgba(59, 130, 246, 0.25); border-color: rgba(96, 165, 250, 0.5); width: fit-content; margin-bottom: 0.2rem;">
+            <span class="flight-pulse-dot" style="background: #38bdf8; box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7);"></span> Trung Tâm Điều Hành Bay AOCC • Airspace Active 24/7
+          </div>
+          <h2 style="color: #ffffff; font-size: 1.45rem; font-weight: 900; margin: 0; letter-spacing: -0.3px; line-height: 1.25;">Hệ Thống Chỉ Huy & Vận Hành Hàng Không</h2>
+          <p style="color: rgba(255, 255, 255, 0.85); margin: 0; font-size: 0.85rem; max-width: 650px;">
+            Giám sát radar chặng bay thời gian thực, điều phối phi đội tàu bay Boeing/Airbus và quản trị dữ liệu vé PNR
+          </p>
+          <div class="banner-telemetry-pills" style="margin-top: 0.25rem;">
+            <span class="banner-pill">🟢 128 Chuyến Bay Khai Thác</span>
+            <span class="banner-pill">⚡ 100% Đúng Giờ (OTP)</span>
+            <span class="banner-pill">🛰 Radar ADS-B Kích Hoạt</span>
+            <span class="banner-pill">🛡 0 Cảnh Báo An Toàn</span>
+          </div>
+        </div>
+
+        <!-- Right Side: Real-time Live Clock & ATC Mini Radar -->
+        <div class="admin-banner-right">
+          <div class="admin-radar-mini" title="ATC Surveillance Radar Live"></div>
+          <div class="admin-clock-box">
+            <div style="font-size: 0.7rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Giờ Hệ Thống (UTC+7)</div>
+            <div style="font-size: 1.2rem; font-weight: 900; color: #38bdf8; font-family: 'Courier New', monospace; letter-spacing: 1px;" id="admin-live-clock">--:--:--</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.2rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h1 style="font-size: 2rem; font-weight: 900; letter-spacing: -0.5px;">Bảng Điều Khiển Vận Hành Bay</h1>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            Giám sát chặng bay thời gian thực & hệ thống đặt vé PNR • GV hướng dẫn: <strong>Chuyên Gia Hàng Không IATA</strong> | Đơn vị Phát triển: SkyWings Core Engineering Team
+          </p>
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <button type="button" class="btn-signin" style="border: 1.5px solid var(--border-subtle); padding: 0.65rem 1.25rem;">Xuất Báo Cáo CSV</button>
+          <button type="button" class="btn-view-details" style="padding: 0.65rem 1.35rem;">+ Điều Phối Chuyến Bay Mới</button>
+        </div>
+      </div>
+
+      <!-- Stat Cards -->
+      <div id="flights" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2.2rem;">
+        <div class="stat-metric-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <small style="color: var(--text-muted); font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">Chuyến Bay Hoạt Động</small>
+            <span style="font-size: 1.5rem;">✈️</span>
+          </div>
+          <div class="stat-metric-val">128</div>
+          <span style="color: var(--badge-green); font-weight: 800; font-size: 0.85rem;">↑ 100% khởi hành đúng giờ</span>
+        </div>
+
+        <div class="stat-metric-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <small style="color: var(--text-muted); font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">Vé Đã Đặt Hôm Nay</small>
+            <span style="font-size: 1.5rem;">🎫</span>
+          </div>
+          <div class="stat-metric-val">342</div>
+          <span style="color: var(--badge-green); font-weight: 800; font-size: 0.85rem;">↑ 92% tỷ lệ lấp đầy ghế</span>
+        </div>
+
+        <div class="stat-metric-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <small style="color: var(--text-muted); font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">Doanh Thu Hôm Nay</small>
+            <span style="font-size: 1.5rem;">💰</span>
+          </div>
+          <div class="stat-metric-val" style="color: var(--accent-orange);">$684,200</div>
+          <span style="color: var(--badge-green); font-weight: 800; font-size: 0.85rem;">↑ +18.4% so với hôm qua</span>
+        </div>
+
+        <div class="stat-metric-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <small style="color: var(--text-muted); font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">Đánh Giá Hành Khách</small>
+            <span style="font-size: 1.5rem;">⭐</span>
+          </div>
+          <div class="stat-metric-val">4.9 / 5.0</div>
+          <span style="color: var(--badge-blue); font-weight: 800; font-size: 0.85rem;">Dựa trên 1.420 đánh giá 5 sao</span>
+        </div>
+      </div>
+
+      <!-- Analytics Charts Grid (Powered by Chart.js) -->
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-bottom: 2.2rem;">
+        <div class="white-panel-card" style="padding: 1.75rem; margin-bottom: 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+            <h3 class="panel-header-title" style="margin-bottom: 0;">Biểu Đồ Doanh Thu 7 Ngày Gần Nhất</h3>
+            <span style="font-size: 0.85rem; color: var(--accent-orange); font-weight: 800; background: rgba(255, 95, 56, 0.1); padding: 0.25rem 0.75rem; border-radius: 20px;">Tuần Này (USD)</span>
+          </div>
+          <div style="height: 250px; position: relative;">
+            <canvas id="revenueTrendChart"></canvas>
+          </div>
+        </div>
+
+        <div class="white-panel-card" style="padding: 1.75rem; margin-bottom: 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+            <h3 class="panel-header-title" style="margin-bottom: 0;">Tỷ Lệ Hạng Vé</h3>
+            <span style="font-size: 0.85rem; color: var(--badge-blue); font-weight: 800; background: rgba(14, 165, 233, 0.1); padding: 0.25rem 0.75rem; border-radius: 20px;">Lấp Đầy 92%</span>
+          </div>
+          <div style="height: 250px; position: relative; display: flex; align-items: center; justify-content: center;">
+            <canvas id="ticketClassChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table: Recent Orders -->
+      <div id="orders" class="white-panel-card" style="padding: 1.75rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+          <h3 class="panel-header-title" style="margin-bottom: 0;">Đơn Đặt Vé Mới Nhất</h3>
+          <input type="text" placeholder="🔍 Tìm kiếm mã PNR, hành khách, chuyến bay..." class="auth-input-control" style="width: 320px; max-width: 100%; padding: 0.5rem 0.9rem; font-size: 0.88rem;">
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Mã PNR</th>
+                <th>Hành Khách</th>
+                <th>Chặng Bay</th>
+                <th>Hãng & Số Hiệu</th>
+                <th>Số Ghế</th>
+                <th>Số Tiền</th>
+                <th>Trạng Thái</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong style="color: var(--accent-orange); letter-spacing: 1px;">SW882P</strong></td>
+                <td><strong>Jonathan Ben</strong></td>
+                <td>SGN ➔ HAN</td>
+                <td>SkyWings Airlines (SW-882)</td>
+                <td><span class="meta-pill" style="color: var(--accent-orange); font-weight: 800;">10F</span></td>
+                <td><strong>$2,120.00</strong></td>
+                <td><span style="background: var(--badge-green-bg); color: var(--badge-green); padding: 0.3rem 0.75rem; border-radius: var(--radius-full); font-weight: 800; font-size: 0.8rem;">Đã Xác Nhận</span></td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--accent-orange); letter-spacing: 1px;">VJ188K</strong></td>
+                <td><strong>Sarah Al-Hassan</strong></td>
+                <td>SGN ➔ HAN</td>
+                <td>Vietjet Air (VJ-188)</td>
+                <td><span class="meta-pill">14C</span></td>
+                <td><strong>$1,200.00</strong></td>
+                <td><span style="background: var(--badge-green-bg); color: var(--badge-green); padding: 0.3rem 0.75rem; border-radius: var(--radius-full); font-weight: 800; font-size: 0.8rem;">Đã Xác Nhận</span></td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--accent-orange); letter-spacing: 1px;">VN214P</strong></td>
+                <td><strong>Michael H. Peter</strong></td>
+                <td>SGN ➔ HAN</td>
+                <td>Vietnam Airlines (VN-214)</td>
+                <td><span class="meta-pill" style="color: var(--accent-orange); font-weight: 800;">02B</span></td>
+                <td><strong>$2,250.00</strong></td>
+                <td><span style="background: var(--badge-green-bg); color: var(--badge-green); padding: 0.3rem 0.75rem; border-radius: var(--radius-full); font-weight: 800; font-size: 0.8rem;">Đã Xác Nhận</span></td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--accent-orange); letter-spacing: 1px;">EK902L</strong></td>
+                <td><strong>Alexander Brooks</strong></td>
+                <td>SGN ➔ HAN</td>
+                <td>Emirates (EK-902)</td>
+                <td><span class="meta-pill">08A</span></td>
+                <td><strong>$1,890.00</strong></td>
+                <td><span style="background: var(--badge-blue-bg); color: var(--badge-blue); padding: 0.3rem 0.75rem; border-radius: var(--radius-full); font-weight: 800; font-size: 0.8rem;">Đang Bay</span></td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--accent-orange); letter-spacing: 1px;">FZ808D</strong></td>
+                <td><strong>David Henderson</strong></td>
+                <td>HAN ➔ SGN</td>
+                <td>Flydubai (FZ-808)</td>
+                <td><span class="meta-pill">19F</span></td>
+                <td><strong>$980.00</strong></td>
+                <td><span style="background: var(--badge-green-bg); color: var(--badge-green); padding: 0.3rem 0.75rem; border-radius: var(--radius-full); font-weight: 800; font-size: 0.8rem;">Đã Xác Nhận</span></td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--accent-orange); letter-spacing: 1px;">QH88T</strong></td>
+                <td><strong>Victoria Sterling</strong></td>
+                <td>SGN ➔ HAN</td>
+                <td>Bamboo Airways (QH-88)</td>
+                <td><span class="meta-pill">16D</span></td>
+                <td><strong>$1,320.00</strong></td>
+                <td><span style="background: var(--badge-green-bg); color: var(--badge-green); padding: 0.3rem 0.75rem; border-radius: var(--radius-full); font-weight: 800; font-size: 0.8rem;">Đã Xác Nhận</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Airports & Gates Grid Section -->
+      <div id="airports" class="white-panel-card" style="padding: 1.75rem; margin-top: 2rem;">
+        <h3 class="panel-header-title">Các Trung Tâm Sân Bay & Cửa Khởi Hành</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+          <div style="background: var(--bg-card-alt); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <strong style="font-size: 1.1rem; display: block; color: var(--accent-orange);">HAN • Hà Nội</strong>
+            <small style="color: var(--text-muted);">Ga Quốc Nội T1 • Cửa 1-15</small>
+            <div style="margin-top: 0.5rem; font-weight: 700; color: var(--badge-green); font-size: 0.85rem;">● Hoạt động bình thường</div>
+          </div>
+          <div style="background: var(--bg-card-alt); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <strong style="font-size: 1.1rem; display: block; color: var(--accent-orange);">DAD • Đà Nẵng</strong>
+            <small style="color: var(--text-muted);">Ga Quốc Tế T1 • Cửa 1-8</small>
+            <div style="margin-top: 0.5rem; font-weight: 700; color: var(--badge-green); font-size: 0.85rem;">● Hoạt động bình thường</div>
+          </div>
+          <div style="background: var(--bg-card-alt); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <strong style="font-size: 1.1rem; display: block; color: var(--accent-orange);">SGN • Hồ Chí Minh</strong>
+            <small style="color: var(--text-muted);">Ga Quốc Tế T2 • Cửa 12-28</small>
+            <div style="margin-top: 0.5rem; font-weight: 700; color: var(--badge-green); font-size: 0.85rem;">● Lưu lượng bay cao</div>
+          </div>
+          <div style="background: var(--bg-card-alt); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <strong style="font-size: 1.1rem; display: block; color: var(--accent-orange);">HAN • Hà Nội</strong>
+            <small style="color: var(--text-muted);">Ga Quốc Nội T1 • Cửa 3-15</small>
+            <div style="margin-top: 0.5rem; font-weight: 700; color: var(--badge-green); font-size: 0.85rem;">● Hoạt động bình thường</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions / System Settings -->
+      <div id="passengers" style="margin-top: 2rem;"></div>
+      <div id="settings" class="white-panel-card" style="padding: 1.75rem; margin-top: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h4 style="font-size: 1.1rem; font-weight: 800;">Trạng Thái Hệ Thống & Điều Phối Bay</h4>
+          <small style="color: var(--text-muted);">Tự động đối soát đơn hàng PNR và đồng bộ hóa lịch bay theo chuẩn IATA</small>
+        </div>
+        <span style="background: var(--badge-green-bg); color: var(--badge-green); font-weight: 800; padding: 0.4rem 1rem; border-radius: var(--radius-full); font-size: 0.85rem;">
+          ✓ Tất Cả Dịch Vụ Ổn Định
+        </span>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="../assets/vendor/chartjs/chart.umd.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

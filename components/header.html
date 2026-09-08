@@ -1,19 +1,40 @@
-<!-- Header Component Reusable -->
-<header class="site-header">
+<!-- Ngefly Header Component Reusable -->
+<header class="ngefly-header">
   <div class="container">
-    <div class="header-inner">
-      <a href="/index.html" class="brand-logo"><span>⚡</span> TechStore</a>
-      <nav class="main-nav">
-        <ul>
-          <li><a href="/index.html" class="nav-link">Trang Chủ</a></li>
-          <li><a href="/pages/products/index.html" class="nav-link">Sản Phẩm</a></li>
-          <li><a href="/pages/cart/index.html" class="nav-link">Giỏ Hàng</a></li>
-          <li><a href="/admin/dashboard/index.html" class="nav-link">Quản Trị</a></li>
+    <div class="navbar-inner">
+      <!-- Brand Logo -->
+      <a href="../index.html" class="logo-wrap" aria-label="SkyWings - Sẵn Sàng Cất Cánh">
+        <span class="logo-icon-svg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
+          </svg>
+        </span>
+        <span class="logo-brand">Sky<span class="logo-accent">Wings</span></span>
+      </a>
+
+      <!-- Main Navigation -->
+      <nav aria-label="Menu điều hướng chính">
+        <ul class="nav-links">
+          <li class="nav-item"><a href="../index.html">Trang Chủ</a></li>
+          <li class="nav-item"><a href="../pages/flights.html">Chuyến Bay</a></li>
+          <li class="nav-item"><a href="../pages/flights.html?view=schedule">Lịch Trình</a></li>
+          <li class="nav-item"><a href="../pages/booking.html">Đặt Chỗ</a></li>
+          <li class="nav-item"><a href="../pages/ticket.html">Vé Của Bạn</a></li>
+          <li class="nav-item"><a href="../admin/index.html" style="color: var(--accent-orange); font-weight: 700;">Quản Trị</a></li>
         </ul>
       </nav>
-      <div class="header-actions">
-        <button id="theme-toggle" class="icon-btn">🌙</button>
-        <a href="/pages/cart/index.html" class="icon-btn">🛒 <span class="cart-badge">0</span></a>
+
+      <!-- Header Actions -->
+      <div class="header-right">
+        <a href="../pages/flights.html" class="btn-nav-search" title="Tìm kiếm chuyến bay" aria-label="Tìm kiếm">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </a>
+        <button id="theme-toggle-btn" class="btn-theme-toggle" title="Đổi giao diện Sáng / Tối" aria-label="Đổi chế độ sáng tối">🌙</button>
+        <a href="../pages/login.html" class="btn-signin">Đăng Nhập</a>
+        <a href="../pages/register.html" class="btn-signup-pill">Đăng Ký</a>
       </div>
     </div>
   </div>

@@ -3,157 +3,447 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TechStore - Website Thương mại điện tử chuyên cung cấp thiết bị công nghệ chính hãng, bảo hành toàn diện.">
-  <title>TechStore - Thế Giới Công Nghệ AI</title>
+  <title>SkyWings - Sẵn Sàng Cất Cánh | Đặt Vé Máy Bay Trực Tuyến</title>
   
-  <!-- CSS Design System -->
+  <!-- Phông chữ tiếng Việt chuẩn đẹp số 1: Be Vietnam Pro -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Three.js cho mô phỏng đường băng 3D và phi cơ -->
+  <script src="assets/js/three.min.js"></script>
+  <!-- Flatpickr Date Picker -->
+  <link rel="stylesheet" href="assets/vendor/flatpickr/flatpickr.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="font-sans antialiased overflow-x-hidden transition-colors duration-300" style="background-color: var(--bg-page); color: var(--text-dark);">
 
-  <!-- ==================== HEADER & NAVIGATION ==================== -->
-  <header class="site-header">
-    <div class="container">
-      <div class="header-inner">
-        <!-- Logo -->
-        <a href="index.html" class="brand-logo" aria-label="Trang chủ TechStore">
-          <span>⚡</span> TechStore
-        </a>
-        
-        <!-- Main Nav -->
-        <nav class="main-nav" aria-label="Điều hướng chính">
-          <ul>
-            <li><a href="index.html" class="nav-link active">Trang Chủ</a></li>
-            <li><a href="pages/products/index.html" class="nav-link">Sản Phẩm</a></li>
-            <li><a href="pages/cart/index.html" class="nav-link">Giỏ Hàng</a></li>
-            <li><a href="admin/dashboard/index.html" class="nav-link">Quản Trị</a></li>
-          </ul>
-        </nav>
+  <!-- Container bao quát toàn bộ trang chủ Desktop -->
+  <div class="relative min-h-screen font-sans overflow-x-hidden transition-colors duration-300" style="background-color: var(--bg-page); color: var(--text-dark);">
 
-        <!-- Actions -->
-        <div class="header-actions">
-          <button id="theme-toggle" class="icon-btn" aria-label="Đổi chế độ sáng tối">🌙</button>
-          <a href="pages/login/index.html" class="icon-btn" aria-label="Tài khoản">👤</a>
-          <a href="pages/cart/index.html" class="icon-btn" aria-label="Giỏ hàng">
-            🛒
-            <span class="cart-badge">0</span>
+    <!-- 1. TOP NAVBAR (NGEFLY SIGNATURE) -->
+    <header class="ngefly-header header-transparent-home">
+      <div class="container mx-auto max-w-[1220px]">
+        <div class="navbar-inner">
+          <a href="index.html" class="logo-wrap" aria-label="SkyWings - Sẵn Sàng Cất Cánh">
+            <span class="logo-icon-svg">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
+              </svg>
+            </span>
+            <span class="logo-brand">Sky<span class="logo-accent">Wings</span></span>
           </a>
+          <nav aria-label="Điều hướng chính">
+            <ul class="nav-links">
+              <li class="nav-item"><a href="index.html" class="active">Trang Chủ</a></li>
+              <li class="nav-item"><a href="pages/flights.html">Chuyến Bay</a></li>
+              <li class="nav-item"><a href="pages/flights.html?view=schedule">Lịch Trình</a></li>
+              <li class="nav-item"><a href="pages/booking.html">Đặt Chỗ</a></li>
+              <li class="nav-item"><a href="pages/ticket.html">Vé Của Bạn</a></li>
+              <li class="nav-item"><a href="admin/index.html" style="color: var(--accent-orange); font-weight: 700;">Quản Trị</a></li>
+            </ul>
+          </nav>
+          <div class="header-right">
+            <a href="pages/flights.html" class="btn-nav-search" title="Tìm kiếm chuyến bay" aria-label="Tìm kiếm">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </a>
+            <button id="theme-toggle-btn" class="btn-theme-toggle" title="Đổi giao diện Sáng / Tối" aria-label="Đổi chế độ sáng tối">🌙</button>
+            <a href="pages/login.html" class="btn-signin">Đăng Nhập</a>
+            <a href="pages/register.html" class="btn-signup-pill">Đăng Ký</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. HERO SECTION & THREE.JS CANVAS (EXTENDED FULL BANNER) -->
+    <section class="relative w-full h-[880px] flex flex-col items-center justify-between pt-24 pb-8 overflow-hidden">
+      <!-- Canvas 3D bối cảnh sân bay ban ngày bao phủ toàn bộ banner -->
+      <div id="webgl-container" class="absolute inset-0 z-0 overflow-hidden">
+        <canvas id="webgl-canvas" class="w-full h-full block" aria-label="Đường băng sân bay 3D SkyWings"></canvas>
+        <!-- Lớp gradient chuyển tiếp mượt mà ở đáy banner hòa vào phần thân web -->
+        <div class="hero-bottom-fade absolute inset-x-0 bottom-0 h-44 pointer-events-none" style="background: linear-gradient(to bottom, transparent 0%, var(--bg-page) 100%);"></div>
+      </div>
+
+      <!-- Tiêu đề Hero trên nền trời -->
+      <div class="relative z-10 text-center pointer-events-none px-4 pt-4">
+        <h1 class="fade-in-up text-5xl lg:text-6xl font-extrabold tracking-tight drop-shadow-sm hero-headline">Ready to take off?</h1>
+        <p class="hero-subtitle-pill mt-3 text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full shadow-sm pointer-events-auto">
+          <span class="hero-live-badge-dot"></span> Sẵn sàng cất cánh • Trải nghiệm đặt vé thông minh thế hệ mới
+        </p>
+      </div>
+
+      <!-- 3. FLOATING SEARCH CARD (Nằm trọn vẹn bên trong Hero banner, nổi trên nền đường băng & bãi cỏ 3D) -->
+      <div class="fade-in-up relative z-20 w-full max-w-6xl mx-auto px-6 mb-4">
+        <div class="rounded-3xl p-4 sm:p-5 shadow-[0_20px_50px_rgba(15,23,42,0.12)] border transition-all" style="background-color: var(--bg-card); color: var(--text-dark); border-color: var(--border-subtle);">
+          <!-- Tabs dịch vụ -->
+          <div class="flex items-center gap-3 mb-4" id="floating-service-tabs">
+            <button type="button" id="tab-round-flight" class="floating-service-tab active flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold tracking-wide shadow-sm transition-all">
+              <span>✈</span> Vé Máy Bay
+            </button>
+            <button type="button" id="tab-round-cruise" class="floating-service-tab flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold tracking-wide transition-all">
+              <span>🚢</span> Du Thuyền
+            </button>
+          </div>
+
+          <!-- 1-ROW INTERACTIVE SEARCH FORM: 4 functional controls + swap button + CTA -->
+          <form id="ngefly-search-form" class="flex items-stretch gap-2 sm:gap-3" action="pages/flights.html" method="GET">
+            <!-- Điểm khởi hành -->
+            <div class="hero-field-card" id="hero-dep-card">
+              <label for="dep-city-select" class="hero-field-label"><span>🛫</span> Điểm Khởi Hành</label>
+              <select id="dep-city-select" name="from" class="hero-field-control" title="Chọn điểm khởi hành">
+                <option value="SGN" selected>SGN • TP. Hồ Chí Minh</option>
+                <option value="HAN">HAN • Hà Nội (Nội Bài)</option>
+                <option value="DAD">DAD • Đà Nẵng</option>
+                <option value="PQC">PQC • Phú Quốc</option>
+                <option value="CXR">CXR • Nha Trang (Cam Ranh)</option>
+                <option value="DXB">DXB • Dubai (UAE)</option>
+                <option value="BKK">BKK • Bangkok (Thái Lan)</option>
+                <option value="SIN">SIN • Singapore (Changi)</option>
+                <option value="RUH">RUH • Riyadh (Saudi)</option>
+              </select>
+              <span class="hero-chevron-icon">▼</span>
+            </div>
+
+            <!-- Nút Hoán Đổi Chiều Bay Nhanh -->
+            <button type="button" id="btn-swap-cities" class="hero-swap-btn" title="Hoán đổi điểm khởi hành và điểm đến">
+              <span>⇄</span>
+            </button>
+
+            <!-- Điểm đến -->
+            <div class="hero-field-card" id="hero-arr-card">
+              <label for="arr-city-select" class="hero-field-label"><span>🛬</span> Điểm Đến</label>
+              <select id="arr-city-select" name="to" class="hero-field-control" title="Chọn điểm đến">
+                <option value="HAN" selected>HAN • Hà Nội (Nội Bài)</option>
+                <option value="SGN">SGN • TP. Hồ Chí Minh</option>
+                <option value="DAD">DAD • Đà Nẵng</option>
+                <option value="PQC">PQC • Phú Quốc</option>
+                <option value="CXR">CXR • Nha Trang (Cam Ranh)</option>
+                <option value="DXB">DXB • Dubai (UAE)</option>
+                <option value="BKK">BKK • Bangkok (Thái Lan)</option>
+                <option value="SIN">SIN • Singapore (Changi)</option>
+                <option value="RUH">RUH • Riyadh (Saudi)</option>
+              </select>
+              <span class="hero-chevron-icon">▼</span>
+            </div>
+
+            <!-- Ngày đi -->
+            <div class="hero-field-card" id="hero-date-card">
+              <label for="dep-date" class="hero-field-label"><span>📅</span> Ngày Khởi Hành</label>
+              <input type="date" id="dep-date" name="date" class="hero-field-control" style="color-scheme: light dark;">
+            </div>
+
+            <!-- Hành khách & Hạng vé -->
+            <div class="hero-field-card" id="hero-pax-card">
+              <label for="pax-count" class="hero-field-label"><span>👥</span> Số Hành Khách</label>
+              <select id="pax-count" name="pax" class="hero-field-control" aria-label="Số hành khách và hạng vé">
+                <optgroup label="Hạng Phổ Thông">
+                  <option value="1 Lớn, Phổ thông">1 Người lớn, Phổ thông</option>
+                  <option value="2 Lớn, Phổ thông">2 Người lớn, Phổ thông</option>
+                  <option value="3 Lớn, Phổ thông">3 Người lớn, Phổ thông</option>
+                  <option value="4 Lớn, Phổ thông">4 Người lớn, Phổ thông</option>
+                  <option value="1 Lớn - 1 Trẻ, Phổ thông">1 Người lớn • 1 Trẻ em, Phổ thông</option>
+                  <option value="2 Lớn - 1 Trẻ, Phổ thông">2 Người lớn • 1 Trẻ em, Phổ thông</option>
+                  <option value="Gia đình (2 Lớn • 2 Trẻ), Phổ thông">Gia đình (2 Lớn • 2 Trẻ), Phổ thông</option>
+                </optgroup>
+                <optgroup label="Hạng Thương Gia">
+                  <option value="1 Lớn, Thương gia">1 Người lớn, Thương gia</option>
+                  <option value="2 Lớn, Thương gia">2 Người lớn, Thương gia</option>
+                  <option value="2 Lớn - 1 Trẻ, Thương gia" selected>2 Người lớn • 1 Trẻ, Thương gia</option>
+                  <option value="Gia đình (2 Lớn • 2 Trẻ), Thương gia">Gia đình (2 Lớn • 2 Trẻ), Thương gia</option>
+                </optgroup>
+              </select>
+              <span class="hero-chevron-icon">▼</span>
+            </div>
+
+            <!-- Nút CTA — shrink-0 đảm bảo KHÔNG BAO GIỜ rớt dòng -->
+            <button type="submit" id="btn-search-submit" class="relative group/btn shrink-0 w-12 sm:w-14 h-auto bg-orange-500 hover:bg-orange-600 rounded-2xl flex items-center justify-center text-white text-lg shadow-lg shadow-orange-500/35 hover:scale-105 active:scale-95 transition-all self-stretch cursor-pointer border-0" aria-label="Tìm kiếm chuyến bay">
+              <span class="absolute inset-0 rounded-2xl bg-orange-400 animate-ping opacity-20 group-hover/btn:opacity-40"></span>
+              <span class="relative z-10 font-bold">➜</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CHẶNG BAY NỔI BẬT & ƯU ĐÃI ==================== -->
+    <main class="max-w-6xl mx-auto px-6 mb-16 pt-2 main-sheet-elevated">
+    <div class="scroll-reveal" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
+      <div>
+        <h2 style="font-size: 1.8rem; font-weight: 900; letter-spacing: -0.5px;">Chặng Bay Nổi Bật</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.35rem;">Ưu đãi giá tốt nhất cho các điểm đến được yêu thích</p>
+      </div>
+      <a href="pages/flights.html" style="display:inline-flex; align-items:center; gap:0.4rem; color: var(--accent-orange); font-weight: 700; border: 1.5px solid var(--accent-orange); padding: 0.45rem 1.1rem; border-radius: 999px; font-size: 0.875rem; transition: background 0.2s, color 0.2s;" onmouseover="this.style.background='var(--accent-orange)';this.style.color='#fff';" onmouseout="this.style.background='transparent';this.style.color='var(--accent-orange)';">Xem Tất Cả ➔</a>
+    </div>
+
+    <div class="scroll-reveal-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+      
+      <!-- Deal 1 -->
+      <div class="white-panel-card deal-card" style="padding: 1.5rem; cursor: pointer;" data-from="SGN" data-to="HAN">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <div style="display: flex; align-items: center; gap: 0.65rem;">
+            <img src="assets/images/airlines/vietnam-airlines.svg" alt="Vietnam Airlines" style="width: 32px; height: 32px; border-radius: 50%; box-shadow: var(--shadow-xs);">
+            <span style="font-weight: 800; font-size: 1.15rem;">SGN ➔ HAN</span>
+          </div>
+          <span class="deal-price-pill">Từ $140</span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.25rem;">Vietnam Airlines • Hơn 40 chuyến/ngày</p>
+        <button type="button" class="btn-view-details" style="width: 100%;">Đặt Vé Ngay</button>
+      </div>
+
+      <!-- Deal 2 -->
+      <div class="white-panel-card deal-card" style="padding: 1.5rem; cursor: pointer;" data-from="SGN" data-to="PQC">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <div style="display: flex; align-items: center; gap: 0.65rem;">
+            <img src="assets/images/airlines/vietjet-air.svg" alt="Vietjet Air" style="width: 32px; height: 32px; border-radius: 50%; box-shadow: var(--shadow-xs);">
+            <span style="font-weight: 800; font-size: 1.15rem;">SGN ➔ PQC</span>
+          </div>
+          <span class="deal-price-pill">Từ $75</span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.25rem;">Vietjet Air • Bay thẳng 1h 05m</p>
+        <button type="button" class="btn-view-details" style="width: 100%;">Đặt Vé Ngay</button>
+      </div>
+
+      <!-- Deal 3 -->
+      <div class="white-panel-card deal-card" style="padding: 1.5rem; cursor: pointer;" data-from="SGN" data-to="DAD">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <div style="display: flex; align-items: center; gap: 0.65rem;">
+            <img src="assets/images/airlines/skywings.svg" alt="SkyWings" style="width: 32px; height: 32px; border-radius: 50%; box-shadow: var(--shadow-xs);">
+            <span style="font-weight: 800; font-size: 1.15rem;">SGN ➔ DAD</span>
+          </div>
+          <span class="deal-price-pill">Từ $85</span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.25rem;">SkyWings Express • Bay thẳng 1h 20m</p>
+        <button type="button" class="btn-view-details" style="width: 100%;">Đặt Vé Ngay</button>
+      </div>
+
+      <!-- Deal 4 -->
+      <div class="white-panel-card deal-card" style="padding: 1.5rem; cursor: pointer;" data-from="HAN" data-to="PQC">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <div style="display: flex; align-items: center; gap: 0.65rem;">
+            <img src="assets/images/airlines/bamboo-airways.svg" alt="Bamboo Airways" style="width: 32px; height: 32px; border-radius: 50%; box-shadow: var(--shadow-xs);">
+            <span style="font-weight: 800; font-size: 1.15rem;">HAN ➔ PQC</span>
+          </div>
+          <span class="deal-price-pill">Từ $160</span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.25rem;">Bamboo Airways • Bay thẳng 2h 10m</p>
+        <button type="button" class="btn-view-details" style="width: 100%;">Đặt Vé Ngay</button>
+      </div>
+
+    </div>
+
+    <!-- ==================== TÍNH NĂNG NỔI BẬT NGEFLY TRAVEL TECH ==================== -->
+    <section class="ngefly-why-choose scroll-reveal" style="margin-top: 4.5rem;">
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+        <span style="color: var(--accent-orange); font-weight: 800; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.2px; background: rgba(255,107,0,0.08); padding: 0.35rem 0.9rem; border-radius: 20px;">Dịch Vụ Đẳng Cấp</span>
+        <h2 style="font-size: 1.85rem; font-weight: 900; margin-top: 0.75rem; letter-spacing: -0.5px;">Tại Sao Lựa Chọn SkyWings?</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 540px; margin: 0.5rem auto 0;">Hệ thống đặt vé máy bay thế hệ mới kết hợp mô phỏng đường băng 3D tương tác và thanh toán an toàn chuẩn quốc tế</p>
+      </div>
+
+      <div class="features-grid scroll-reveal-stagger">
+        <div class="feature-item-card">
+          <div class="feature-badge-icon">✈️</div>
+          <h3 style="font-weight: 800; font-size: 1.1rem; margin-bottom: 0.5rem;">Phi Trường 3D Tương Tác</h3>
+          <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5;">Trải nghiệm công nghệ Three.js WebGL mô phỏng phi cơ cất cánh và đường băng sống động theo thời gian thực.</p>
+        </div>
+
+        <div class="feature-item-card">
+          <div class="feature-badge-icon">⚡</div>
+          <h3 style="font-weight: 800; font-size: 1.1rem; margin-bottom: 0.5rem;">Tìm Kiếm Siêu Tốc 0.2s</h3>
+          <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5;">So sánh vé từ hơn 500+ hãng bay uy tín với thuật toán tối ưu giá vé và lịch trình bay thẳng tiện lợi nhất.</p>
+        </div>
+
+        <div class="feature-item-card">
+          <div class="feature-badge-icon">🛡️</div>
+          <h3 style="font-weight: 800; font-size: 1.1rem; margin-bottom: 0.5rem;">Bảo Mật Chuẩn PCI-DSS</h3>
+          <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5;">Thanh toán mã hóa đa lớp, hỗ trợ thẻ quốc tế Visa/Mastercard và chính sách hoàn hủy vé linh hoạt 24/7.</p>
+        </div>
+
+        <div class="feature-item-card">
+          <div class="feature-badge-icon">🎫</div>
+          <h3 style="font-weight: 800; font-size: 1.1rem; margin-bottom: 0.5rem;">Boarding Pass Điện Tử</h3>
+          <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5;">Nhận ngay thẻ lên máy bay kỹ thuật số với mã PNR định danh và mã QR check-in không chạm tại phi trường.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== CHÂN TRANG CAO CẤP (AVIATION LUXURY FOOTER) ==================== -->
+  <footer class="ngefly-footer">
+    <!-- Top Newsletter Subscription Card -->
+    <div class="footer-newsletter-section">
+      <div class="container">
+        <div class="newsletter-card">
+          <div class="newsletter-content-wrap">
+            <div class="newsletter-icon-box">✈️</div>
+            <div>
+              <h3 class="newsletter-title">Đăng Ký Nhận Đặc Quyền & Ưu Đãi Bay SkyWings</h3>
+              <p class="newsletter-desc">Nhận ngay voucher giảm giá 25% cho chuyến bay đầu tiên cùng bản tin độc quyền cập nhật mạng bay hơn 150 điểm đến.</p>
+            </div>
+          </div>
+          <form class="newsletter-form-wrap" id="footer-newsletter-form" action="javascript:void(0);">
+            <div class="newsletter-input-row">
+              <input type="email" class="newsletter-input" placeholder="Nhập địa chỉ email của bạn..." required aria-label="Email nhận bản tin SkyWings">
+              <button type="submit" class="newsletter-btn">
+                <span>Đăng Ký</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+            <div class="newsletter-security">
+              <span>🔒 Cam kết bảo mật thông tin chuẩn ISO/IEC 27001 & không spam.</span>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  </header>
 
-  <!-- ==================== MAIN CONTENT ==================== -->
-  <main class="container">
-    
-    <!-- Hero Banner -->
-    <section class="hero-section" aria-label="Banner nổi bật">
-      <div class="hero-content">
-        <span class="hero-badge">🚀 Kỷ nguyên AI Web 2026</span>
-        <h1 class="hero-title">Khám Phá Công Nghệ Đỉnh Cao</h1>
-        <p class="hero-subtitle">Trải nghiệm mua sắm thiết bị thông minh với ưu đãi lên tới 30% và hỗ trợ trả góp 0% lãi suất.</p>
-        <a href="#products-section" class="btn-primary">
-          <span>Mua Sắm Ngay</span>
-          <span>→</span>
-        </a>
-      </div>
-      <div class="hero-visual" style="font-size: 6rem;">
-        🤖
-      </div>
-    </section>
-
-    <!-- Category Pills -->
-    <section class="category-section" aria-label="Danh mục sản phẩm">
-      <div class="category-list">
-        <button class="category-pill active" data-category="all">✨ Tất Cả</button>
-        <button class="category-pill" data-category="laptop">💻 Laptop</button>
-        <button class="category-pill" data-category="phone">📱 Điện Thoại</button>
-        <button class="category-pill" data-category="audio">🎧 Tai Nghe</button>
-        <button class="category-pill" data-category="watch">⌚ Đồng Hồ</button>
-        <button class="category-pill" data-category="accessory">⌨️ Phụ Kiện</button>
-      </div>
-    </section>
-
-    <!-- Featured Products -->
-    <section id="products-section" class="products-section" aria-label="Danh sách sản phẩm">
-      <div class="section-header">
-        <h2 class="section-title">Sản Phẩm Nổi Bật</h2>
-      </div>
-      
-      <!-- Product Grid (Populated dynamically by JS) -->
-      <div id="product-grid-container" class="product-grid">
-        <!-- Rendered via assets/js/main.js -->
-      </div>
-    </section>
-
-    <!-- Services / Benefits -->
-    <section class="benefits-section" aria-label="Lợi ích khách hàng">
-      <article class="benefit-card">
-        <div class="benefit-icon">🚚</div>
-        <h3 class="benefit-title">Giao Hàng Siêu Tốc</h3>
-        <p class="benefit-desc">Miễn phí vận chuyển toàn quốc cho đơn từ 500k</p>
-      </article>
-      <article class="benefit-card">
-        <div class="benefit-icon">🛡️</div>
-        <h3 class="benefit-title">Bảo Hành Chính Hãng</h3>
-        <p class="benefit-desc">Cam kết 100% hàng chính hãng, đổi mới 30 ngày</p>
-      </article>
-      <article class="benefit-card">
-        <div class="benefit-icon">💳</div>
-        <h3 class="benefit-title">Thanh Toán An Toàn</h3>
-        <p class="benefit-desc">Hỗ trợ đa dạng phương thức thanh toán bảo mật</p>
-      </article>
-      <article class="benefit-card">
-        <div class="benefit-icon">💬</div>
-        <h3 class="benefit-title">Hỗ Trợ 24/7</h3>
-        <p class="benefit-desc">Đội ngũ kỹ thuật viên AI hỗ trợ tức thì</p>
-      </article>
-    </section>
-
-  </main>
-
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="site-footer">
+    <!-- Main Navigation Columns -->
     <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <h3 style="color:#ffffff; margin-bottom:12px;">⚡ TechStore</h3>
-          <p style="font-size:0.875rem; line-height:1.6;">Dự án thực hành môn Thiết kế & Lập trình Web - Học phần AI Web Development.</p>
+      <div class="footer-main-grid">
+        <!-- Cột 1: Thương hiệu SkyWings -->
+        <div class="footer-brand-col">
+          <a href="index.html" class="footer-logo-wrap" aria-label="SkyWings - Sẵn Sàng Cất Cánh">
+            <span class="footer-logo-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
+              </svg>
+            </span>
+            <span class="footer-brand-name">Sky<span class="footer-brand-accent">Wings</span></span>
+          </a>
+          <p class="footer-brand-desc">
+            Hãng hàng không công nghệ số 5 sao với trải nghiệm bay thượng lưu chuẩn quốc tế. Hệ thống đặt vé thông minh, mô phỏng buồng lái 3D và dịch vụ đẳng cấp trên 150 điểm đến toàn cầu.
+          </p>
+          <div class="footer-contact-cards">
+            <div class="footer-contact-item">
+              <span class="footer-contact-icon">📞</span>
+              <div class="footer-contact-meta">
+                <span class="footer-contact-label">Tổng Đài Hỗ Trợ 24/7 (Miễn Cước)</span>
+                <span class="footer-contact-value">1900 888 999</span>
+              </div>
+            </div>
+            <div class="footer-contact-item">
+              <span class="footer-contact-icon">✉️</span>
+              <div class="footer-contact-meta">
+                <span class="footer-contact-label">Hộp Thư Chăm Sóc Khách Hàng</span>
+                <span class="footer-contact-value">concierge@skywings.vn</span>
+              </div>
+            </div>
+          </div>
+          <div class="footer-social-bar">
+            <a href="javascript:void(0);" class="footer-social-btn" aria-label="Facebook SkyWings" title="Facebook">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="javascript:void(0);" class="footer-social-btn" aria-label="Instagram SkyWings" title="Instagram">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="javascript:void(0);" class="footer-social-btn" aria-label="YouTube SkyWings" title="YouTube">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="javascript:void(0);" class="footer-social-btn" aria-label="LinkedIn SkyWings" title="LinkedIn">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+          </div>
         </div>
+
+        <!-- Cột 2: Hành trình & Đặt chỗ -->
         <div class="footer-col">
-          <h4>Danh Mục</h4>
-          <ul>
-            <li><a href="#">Laptop & PC</a></li>
-            <li><a href="#">Điện Thoại</a></li>
-            <li><a href="#">Phụ Kiện Thông Minh</a></li>
+          <h4 class="footer-col-title">Hành Trình & Đặt Chỗ</h4>
+          <ul class="footer-nav-list">
+            <li><a href="pages/flights.html"><span class="nav-bullet">➔</span> Tìm Kiếm Vé Máy Bay</a></li>
+            <li><a href="pages/flights.html?view=schedule"><span class="nav-bullet">➔</span> Lịch Trình Bay Chi Tiết <span class="footer-pill-tag">Live</span></a></li>
+            <li><a href="pages/booking.html"><span class="nav-bullet">➔</span> Đặt Chỗ Hành Khách</a></li>
+            <li><a href="pages/seats.html"><span class="nav-bullet">➔</span> Sơ Đồ Ghế Ngồi 3D</a></li>
+            <li><a href="pages/payment.html"><span class="nav-bullet">➔</span> Cổng Thanh Toán An Toàn</a></li>
+            <li><a href="pages/ticket.html"><span class="nav-bullet">➔</span> Thẻ Lên Máy Bay Điện Tử</a></li>
           </ul>
         </div>
+
+        <!-- Cột 3: Trải nghiệm & Hội viên -->
         <div class="footer-col">
-          <h4>Hỗ Trợ</h4>
-          <ul>
-            <li><a href="#">Chính Sách Bảo Hành</a></li>
-            <li><a href="#">Hướng Dẫn Mua Hàng</a></li>
-            <li><a href="#">Quy Định Đổi Trả</a></li>
+          <h4 class="footer-col-title">Trải Nghiệm & Hội Viên</h4>
+          <ul class="footer-nav-list">
+            <li><a href="pages/login.html"><span class="nav-bullet">➔</span> SkyMiles Rewards Club <span class="footer-pill-tag">VIP</span></a></li>
+            <li><a href="pages/flights.html"><span class="nav-bullet">➔</span> Hạng Thương Gia SkyFirst</a></li>
+            <li><a href="pages/seats.html"><span class="nav-bullet">➔</span> Suất Ăn & Ẩm Thực Cao Cấp</a></li>
+            <li><a href="pages/ticket.html"><span class="nav-bullet">➔</span> Tiêu Chuẩn Hành Lý Miễn Cước</a></li>
+            <li><a href="pages/flights.html"><span class="nav-bullet">➔</span> Hướng Dẫn Hoàn Đổi Vé</a></li>
+            <li><a href="index.html#destinations"><span class="nav-bullet">➔</span> Điểm Đến Du Lịch Nổi Bật</a></li>
           </ul>
         </div>
+
+        <!-- Cột 4: Hỗ trợ & Quản trị -->
         <div class="footer-col">
-          <h4>Thành Viên Nhóm</h4>
-          <ul>
-            <li>Nguyễn Nhật Bảo Lâm</li>
-            <li>Mai Huy Phong</li>
-            <li>Lê Nhật Duy</li>
-            <li>Vũ Minh Tiến</li>
+          <h4 class="footer-col-title">Hỗ Trợ & Quản Trị</h4>
+          <ul class="footer-nav-list">
+            <li><a href="pages/login.html"><span class="nav-bullet">➔</span> Đăng Nhập Tài Khoản</a></li>
+            <li><a href="pages/register.html"><span class="nav-bullet">➔</span> Đăng Ký Thành Viên Mới</a></li>
+            <li><a href="admin/index.html"><span class="nav-bullet">➔</span> Cổng Quản Trị Vận Hành <span class="footer-pill-tag">Admin</span></a></li>
+            <li><a href="javascript:void(0);"><span class="nav-bullet">➔</span> Điều Khoản Sử Dụng Dịch Vụ</a></li>
+            <li><a href="javascript:void(0);"><span class="nav-bullet">➔</span> Chính Sách Bảo Mật Riêng Tư</a></li>
+            <li><a href="javascript:void(0);"><span class="nav-bullet">➔</span> Hướng Dẫn Check-in Sân Bay</a></li>
           </ul>
         </div>
       </div>
 
-      <div class="footer-bottom">
-        <p>&copy; 2026 TechStore. Thực hiện bởi Nhóm sinh viên AI Web Development.</p>
+      <!-- Trust Badges & Payment Brands -->
+      <div class="footer-trust-row">
+        <div class="trust-group">
+          <span class="trust-label">Chứng nhận hàng không:</span>
+          <span class="trust-chip">🎖️ IATA Member</span>
+          <span class="trust-chip">⭐ Skytrax 5-Star 2026</span>
+          <span class="trust-chip">🛡️ PCI-DSS Level 1</span>
+          <span class="trust-chip">🔒 256-Bit SSL Encryption</span>
+        </div>
+        <div class="trust-group">
+          <span class="trust-label">Phương thức thanh toán:</span>
+          <span class="pay-brand">VISA</span>
+          <span class="pay-brand">MasterCard</span>
+          <span class="pay-brand">JCB</span>
+          <span class="pay-brand">MoMo</span>
+          <span class="pay-brand">VNPay</span>
+          <span class="pay-brand">Apple Pay</span>
+        </div>
+      </div>
+
+      <!-- Academic Project Credits & Honor Banner -->
+      <div class="footer-academic-panel">
+        <div class="academic-badge-tag">Đề Án Tốt Nghiệp / Niên Luận Chuyên Ngành</div>
+        <div class="academic-headline">
+          HỆ THỐNG ĐẶT VÉ MÁY BAY TRỰC TUYẾN <strong>SKYWINGS (NGEFLY)</strong>
+        </div>
+        <div class="academic-details-row">
+          <span>Khóa Học: <strong>Web & AI Development 2026</strong></span>
+          <span class="academic-dot">•</span>
+          <span>Bảo mật giao dịch: <code class="security-token" title="Hệ thống mã hóa chuẩn PCI-DSS" style="font-family:monospace; background:rgba(255,255,255,0.08); padding:2px 8px; border-radius:6px; font-size:11px; border: 1px solid rgba(255,255,255,0.15);">U0tZV0lOR1MtVkVSSUZJRUQtMjAyNi1TRUNVUklUWV9UT0tFTg==</code></span><span class="academic-dot">•</span><span>Chứng nhận an toàn: <strong class="students-highlight">IATA & PCI-DSS Level 1 Verified</strong></span>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom-bar">
+        <div class="footer-copy-text">
+          &copy; 2026 <strong>SkyWings Airlines Inc.</strong> Tất cả quyền sở hữu trí tuệ và công nghệ mô phỏng được bảo lưu.
+        </div>
+        <div class="footer-legal-nav">
+          <a href="javascript:void(0);">Chính sách bảo mật</a>
+          <a href="javascript:void(0);">Điều kiện vận chuyển</a>
+          <a href="javascript:void(0);">Tiêu chuẩn an toàn bay</a>
+          <button type="button" class="btn-back-to-top" id="footer-back-to-top" aria-label="Cuộn lên đầu trang">
+            <span>Lên đầu trang</span>
+            <span>▲</span>
+          </button>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- Application Logic -->
+  </div>
+
+  <script src="assets/vendor/flatpickr/flatpickr.min.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

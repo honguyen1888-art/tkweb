@@ -1,59 +1,48 @@
 ================================================================================
                     NHẬT KÝ PROMPT AI - TUẦN 1
-        Học phần: AI Web Development (Nhập Môn & Hệ Sinh Thái AI)
-        Đề tài: Website Thương Mại Điện Tử (TechStore)
+        Học phần: AI Web Development / Thiết Kế & Lập Trình Web
+        Đề tài: Nền Tảng Đặt Vé Máy Bay Trực Tuyến Thế Hệ Mới (Ngefly)
         Nhóm sinh viên thực hiện:
-        1. Nguyễn Nhật Bảo Lâm (Leader)
-        2. Mai Huy Phong (Member)
-        3. Lê Nhật Duy (Member)
-        4. Vũ Minh Tiến (Member)
+        Đội ngũ phát triển kỹ thuật:
+        SkyWings Core Aviation Engineering Team
+        Security Token: U0tZV0lOR1MtQ09SRS1URUFNLTIwMjY=
 ================================================================================
 
-[PROMPT 1] - KHỞI TẠO Ý TƯỞNG & PHÂN RÃ DỰ ÁN (PROJECT DECOMPOSITION)
+[PROMPT 1] - KHỞI TẠO Ý TƯỞNG & PHÂN RÃ HỆ THỐNG NGEFLY (TRAVEL TECH)
 --------------------------------------------------------------------------------
 Bối cảnh: Dự án bài tập lớn nhóm môn Thiết kế & Lập trình Web.
-Đề tài: Website Thương mại Điện tử / Bán hàng trực tuyến (E-commerce Website).
+Đề tài: Hệ Thống Đặt Vé Máy Bay Trực Tuyến Phong Cách Hiện Đại (Ngefly Travel Tech).
 Yêu cầu:
-1. Phân rã bài toán website thương mại điện tử thành các module người dùng và quản trị viên.
-2. Đề xuất cấu trúc thư mục dự án chuẩn dành cho lập trình viên Web hiện đại.
-3. Thiết kế mô hình cơ sở dữ liệu quan hệ (ERD logic) gồm các bảng: users, categories, products, orders, order_details, cart.
+1. Phân rã bài toán đặt vé máy bay cao cấp chuẩn quốc tế theo phong cách Ngefly.
+2. Xây dựng luồng đặt vé: Hero "Ready to take off?" -> 10 Search Results -> Flight Details (Extra convenience & Schedule) -> Payment Detail (Credit Card Mockup) -> Boarding Pass (PNR & QR).
+3. Thiết kế mô hình cơ sở dữ liệu quan hệ (ERD logic): users, airlines, airports, aircrafts, flights, seats, bookings, passengers, tickets, payments.
 
-[PROMPT 2] - THIẾT KẾ CẤU TRÚC THƯ MỤC CHUẨN (SCAFFOLDING)
+[PROMPT 2] - TỐI ƯU CẤU TRÚC FILE TINH GỌN (FLAT & MODULAR ARCHITECTURE)
 --------------------------------------------------------------------------------
-Yêu cầu: 
-Hãy tạo cấu trúc cây thư mục sạch, module hóa cho dự án Website bán hàng với HTML5, CSS3, JavaScript:
-- assets/: Chứa tài nguyên tĩnh (css/, js/, images/, fonts/).
-- components/: Chứa các thành phần giao diện tái sử dụng (header, footer, product-card, navbar).
-- pages/: Chứa các trang chức năng (home, products, product-detail, cart, checkout, auth).
-- admin/: Khu vực quản trị.
-- database/: Chứa script khởi tạo cơ sở dữ liệu.
-- README.md: Tài liệu đặc tả dự án.
+Yêu cầu:
+Soạn cấu trúc thư mục dự án tinh gọn nhất:
+- assets/: css/style.css, js/main.js, images/, fonts/.
+- components/: header.html, footer.html.
+- pages/: flights.html, booking.html, seats.html, payment.html, ticket.html, login.html, register.html.
+- admin/: index.html (Dashboard quản trị).
+- database/: database.sql.
+- index.html: Trang chủ chính.
+- README.md: Đặc tả hệ thống, phân công nhiệm vụ nhóm (Leader Michael H. Peter).
 - prompt.txt: Nhật ký lưu trữ prompt.
 
-[PROMPT 3] - XÂY DỰNG KHUNG HTML5 SEMANTIC (XƯƠNG DỰ ÁN)
+[PROMPT 3] - TÍCH HỢP 3D THREE.JS RUNWAY & BỘ TỔNG HỢP ÂM THANH WEB AUDIO API
 --------------------------------------------------------------------------------
 Yêu cầu:
-Viết mã nguồn index.html cho trang chủ Website thương mại điện tử:
-- Tuân thủ chuẩn Semantic HTML5: sử dụng các thẻ <header>, <nav>, <main>, <section>, <article>, <aside>, <footer>.
-- Thân thiện với SEO và Accessibility (ARIA labels, alt text, meta viewport responsive).
-- Tích hợp liên kết tới CSS Design System và file JavaScript xử lý tương tác.
-- Cấu trúc các khối: Header & Top Nav -> Hero Banner -> Danh mục nổi bật (Categories) -> Sản phẩm bán chạy (Featured Products) -> Cam kết dịch vụ (Features/Benefits) -> Footer.
+Tái hiện chính xác phong cách đồ họa trong video mẫu:
+- Sử dụng Three.js WebGL dựng đường băng sân bay 3D (Airport Runway) với máy bay mô hình chuyển động uốn lượn và dải đèn dẫn hướng ban đêm tại Hero banner.
+- Tích hợp Web Audio API phát hiệu ứng âm thanh động cơ phản lực (Jet frequency sweep) khi bấm tìm chuyến bay và tiếng click UI mượt mà.
+- Thiết kế Floating Search Widget dạng bo tròn mềm mại với nút hoán đổi và nút tìm kiếm hình tròn màu cam đặc trưng của Ngefly.
 
-[PROMPT 4] - THIẾT LẬP HỆ THỐNG CSS DESIGN SYSTEM & RESET (DA DỰ ÁN)
+[PROMPT 4] - THIẾT KẾ GIAO DIỆN CÁC TRANG CHỨC NĂNG CHUẨN VIDEO
 --------------------------------------------------------------------------------
 Yêu cầu:
-Viết file assets/css/style.css thiết lập nền tảng giao diện:
-- Sử dụng CSS Custom Properties (CSS Variables) cho bảng màu (:root { --primary-color, --secondary-color, --bg-color, --text-color, --border-radius, --transition }).
-- Hỗ trợ biến sẵn sàng cho tính năng Dark/Light Mode sau này.
-- Modern CSS Reset để chuẩn hóa hiển thị trên mọi trình duyệt.
-- Xây dựng hệ thống Grid & Flexbox cơ bản cho Header, Container, Product Grid card.
-
-[PROMPT 5] - KHỞI TẠO KHUNG JAVASCRIPT & STATE QUẢN LÝ TƯƠNG TÁC (LINH HỒN DỰ ÁN)
---------------------------------------------------------------------------------
-Yêu cầu:
-Viết file assets/js/main.js với các tính năng khởi tạo:
-- Khởi tạo lắng nghe sự kiện khi DOM ready (DOMContentLoaded).
-- Quản lý trạng thái giỏ hàng cơ bản (Mock Cart State lưu trong LocalStorage).
-- Xử lý tương tác menu mobile (Toggle Navigation Drawer).
-- Thông báo Toast đơn giản khi người dùng thêm sản phẩm vào giỏ hàng.
+- Trang 10 Search Results (pages/flights.html): Thanh tóm tắt gọn gàng, bộ lọc theo giá/giờ, thẻ vé Ondy Air, Khang Air, Dtw Airlines, Vietnam Airlines với nút "View details" cam.
+- Trang Flight Details (pages/booking.html): Thẻ tóm tắt chặng bay, tùy chọn đặt phòng khách sạn và xe đưa đón giảm 30%, lịch trình cất/hạ cánh và sidebar tóm tắt giá.
+- Trang Payment Detail (pages/payment.html): Mockup thẻ tín dụng Visa kim loại đen bóng, form nhập thông tin thẻ và nút thanh toán bảo mật.
+- Trang Boarding Pass (pages/ticket.html): Thẻ lên tàu bay sang trọng có mã PNR 6 ký tự và mã QR quét tại cửa an ninh.
 ================================================================================
