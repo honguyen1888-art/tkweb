@@ -3,28 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Flex & Grid Battle</title>
+  <title>Portfolio Cá Nhân</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- ===== PHẦN 1: FLEXBOX - CĂN GIỮA HỘP NỘI DUNG ===== -->
-  <section class="container">
-    <div class="box">
-      <h2>Flexbox Center</h2>
-      <p>Hộp này được căn giữa màn hình cả theo chiều dọc và chiều ngang bằng Flexbox.</p>
-    </div>
-  </section>
+  <div class="page-grid">
 
-  <!-- ===== PHẦN 2: CSS GRID - BỐ CỤC 3 CỘT ===== -->
-  <section class="grid-section">
-    <h2 class="grid-title">CSS Grid Layout (3 cột)</h2>
-    <div class="grid-container">
-      <div class="grid-item">Cột 1</div>
-      <div class="grid-item">Cột 2</div>
-      <div class="grid-item">Cột 3</div>
-    </div>
-  </section>
+    <!-- HEADER: chiếm toàn bộ chiều ngang -->
+    <header class="header">
+      <h1>Mai Huy Phong</h1>
+      <p>Front-end Developer</p>
+    </header>
+
+    <!-- SIDEBAR: rộng 250px -->
+    <aside class="sidebar">
+      <nav>
+        <ul>
+          <li><a href="#about">Giới thiệu</a></li>
+          <li><a href="#skills">Kỹ năng</a></li>
+          <li><a href="#projects">Dự án</a></li>
+          <li><a href="#contact">Liên hệ</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- MAIN CONTENT: chiếm phần còn lại -->
+    <main class="main-content">
+
+      <section id="about">
+        <h2>Giới thiệu</h2>
+        <p>
+          Tôi là một lập trình viên front-end yêu thích xây dựng giao diện
+          web hiện đại, tối ưu trải nghiệm người dùng và hiệu năng.
+        </p>
+      </section>
+
+      <section id="skills">
+        <h2>Kỹ năng (Skills)</h2>
+        <div class="skills-list">
+          <span class="skill-item">HTML5</span>
+          <span class="skill-item">CSS3</span>
+          <span class="skill-item">JavaScript</span>
+          <span class="skill-item">Flexbox</span>
+          <span class="skill-item">CSS Grid</span>
+          <span class="skill-item">React</span>
+          <span class="skill-item">Git</span>
+          <span class="skill-item">Responsive Design</span>
+        </div>
+      </section>
+
+      <section id="projects">
+        <h2>Dự án</h2>
+        <p>Danh sách các dự án tiêu biểu sẽ được cập nhật tại đây.</p>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>&copy; 2026 Nguyễn Văn A. All rights reserved.</p>
+    </footer>
+
+  </div>
 
 </body>
 </html>
