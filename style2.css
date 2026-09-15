@@ -1,0 +1,82 @@
+```css
+/* Xóa khoảng cách mặc định của trình duyệt */
+body {
+    margin: 0;
+}
+
+/* =========================
+   BỐ CỤC TỔNG THỂ - GRID
+   ========================= */
+
+.container {
+    display: grid;
+
+    /* 2 cột: Sidebar 250px, Main chiếm phần còn lại */
+    grid-template-columns: 250px 1fr;
+
+    /* Các khu vực của trang */
+    grid-template-areas:
+        "header header"
+        "sidebar main"
+        "footer footer";
+}
+
+/* Header */
+header {
+    grid-area: header;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Sidebar */
+aside {
+    grid-area: sidebar;
+    background-color: #eeeeee;
+    padding: 20px;
+}
+
+/* Main Content */
+main {
+    grid-area: main;
+    padding: 20px;
+}
+
+/* Footer */
+footer {
+    grid-area: footer;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+
+/* =========================
+   SKILLS - FLEXBOX
+   ========================= */
+
+.skills {
+    display: flex;
+
+    /* Các item nằm ngang */
+    flex-direction: row;
+
+    /* Cho phép xuống dòng khi không đủ chỗ */
+    flex-wrap: wrap;
+
+    /* Khoảng cách giữa các item */
+    gap: 15px;
+
+    /* Căn giữa các item */
+    justify-content: center;
+}
+
+/* Từng kỹ năng */
+.skill {
+    background-color: lightgray;
+    padding: 15px 25px;
+    border-radius: 10px;
+}
+```
