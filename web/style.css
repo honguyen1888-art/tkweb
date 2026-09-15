@@ -1,0 +1,77 @@
+/* ===================================
+   RESET CƠ BẢN
+=================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #222;
+}
+
+/* ===================================
+   PHẦN 1: FLEXBOX - CĂN GIỮA HỘP
+   (Prompt mẫu Flexbox)
+=================================== */
+.container {
+  display: flex;
+  justify-content: center; /* căn giữa theo chiều ngang */
+  align-items: center;     /* căn giữa theo chiều dọc */
+  height: 100vh;           /* chiều cao toàn màn hình */
+  background-color: #f4f6f9;
+}
+
+.box {
+  background-color: #ffffff;
+  padding: 40px 50px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+}
+
+.box h2 {
+  margin-bottom: 12px;
+  color: #2b6cb0;
+}
+
+/* ===================================
+   PHẦN 2: CSS GRID - BỐ CỤC 3 CỘT
+   (Prompt mẫu Grid)
+=================================== */
+.grid-section {
+  padding: 60px 20px;
+  background-color: #ffffff;
+}
+
+.grid-title {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cột bằng nhau */
+  gap: 20px;                             /* dùng gap thay cho margin */
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.grid-item {
+  background-color: #e2e8f0; /* màu nền xám nhạt */
+  border-radius: 10px;       /* bo góc 10px */
+  padding: 40px 20px;
+  text-align: center;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+/* Responsive: co giãn tốt trên màn hình nhỏ */
+@media (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: 1fr; /* chuyển thành 1 cột trên mobile */
+  }
+}
