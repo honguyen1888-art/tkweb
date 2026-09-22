@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 3: Smart Navigation Bar</title>
+    <style>
+        :root {
+            --color-primary: #6366f1;
+            --color-gray-dark: #0f172a;
+            --color-gray-medium: #64748b;
+            --color-gray-light: #e2e8f0;
+            --color-bg: #f8fafc;
+            --color-surface: #ffffff;
+            --space-unit: 8px;
+            --space-2: calc(var(--space-unit) * 2);
+            --space-3: calc(var(--space-unit) * 3);
+            --space-4: calc(var(--space-unit) * 4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-gray-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navbar chính */
+        .navbar {
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-gray-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 var(--space-3);
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-logo {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Menu đầy đủ trên Desktop */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: var(--space-3);
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--color-gray-dark);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: var(--space-1) var(--space-2);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--color-primary);
+            background: #eef2ff;
+        }
+
+        .nav-cta {
+            background: var(--color-primary);
+            color: #ffffff !important;
+            padding: 10px 20px;
+            border-radius: 8px;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .nav-cta:hover {
+            opacity: 0.9;
+            background: var(--color-primary) !important;
+        }
+
+        /* Nút Hamburger (mặc định ẩn trên Desktop bằng display: none) */
+        .hamburger-btn {
+            display: none; /* Desktop: ẩn đi */
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            min-width: 48px;
+            min-height: 48px; /* Touch target chuẩn */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            border-radius: 8px;
+        }
+
+        .hamburger-line {
+            width: 26px;
+            height: 3px;
+            background-color: var(--color-gray-dark);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Dropdown Menu */
+        .mobile-menu {
+            display: none; /* Mặc định ẩn */
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-gray-light);
+            padding: var(--space-2) var(--space-3);
+            list-style: none;
+        }
+
+        .mobile-menu li {
+            margin-bottom: var(--space-1);
+        }
+
+        .mobile-menu .nav-link {
+            display: block;
+            padding: 12px var(--space-2);
+            font-size: 1.05rem;
+            min-height: 48px;
+        }
+
+        /* Responsive Breakpoint: < 768px (Mobile) */
+        @media (max-width: 767px) {
+            /* Ẩn thanh menu ngang Desktop bằng display: none */
+            .nav-menu {
+                display: none;
+            }
+
+            /* Hiện nút Hamburger trên Mobile bằng display: flex */
+            .hamburger-btn {
+                display: flex;
+            }
+
+            /* Khi bật menu trên mobile */
+            .mobile-menu.active {
+                display: block;
+                animation: slideDown 0.25s ease-out;
+            }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Main Demo Content */
+        .page-content {
+            max-width: 800px;
+            margin: var(--space-4) auto;
+            padding: 0 var(--space-3);
+        }
+
+        .demo-card {
+            background: var(--color-surface);
+            padding: var(--space-4);
+            border-radius: 12px;
+            border: 1px solid var(--color-gray-light);
+        }
+
+        .demo-card h1 {
+            font-size: 1.75rem;
+            margin-bottom: var(--space-2);
+        }
+
+        .demo-card p {
+            color: var(--color-gray-medium);
+            line-height: 1.6;
+            margin-bottom: var(--space-2);
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#" class="brand-logo">⚡ SmartNav</a>
+
+            <!-- Desktop Menu (Ẩn trên mobile bằng display: none) -->
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link">Trang chủ</a></li>
+                <li><a href="#" class="nav-link">Tính năng</a></li>
+                <li><a href="#" class="nav-link">Bảng giá</a></li>
+                <li><a href="#" class="nav-link">Liên hệ</a></li>
+                <li><a href="#" class="nav-link nav-cta">Đăng ký ngay</a></li>
+            </ul>
+
+            <!-- Hamburger Button (Hiện trên mobile < 768px) -->
+            <button type="button" class="hamburger-btn" id="hamburgerBtn" aria-label="Mở menu điều hướng">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <ul class="mobile-menu" id="mobileMenu">
+            <li><a href="#" class="nav-link">Trang chủ</a></li>
+            <li><a href="#" class="nav-link">Tính năng</a></li>
+            <li><a href="#" class="nav-link">Bảng giá</a></li>
+            <li><a href="#" class="nav-link">Liên hệ</a></li>
+            <li><a href="#" class="nav-link nav-cta" style="text-align:center;">Đăng ký ngay</a></li>
+        </ul>
+    </header>
+
+    <main class="page-content">
+        <div class="demo-card">
+            <h1>Smart Navigation Bar Demo</h1>
+            <p><strong>Cơ chế hoạt động:</strong> Trên màn hình lớn (Desktop), toàn bộ các link điều hướng hiển thị đầy đủ trên thanh ngang. Nút Hamburger được ẩn bằng <code>display: none</code>.</p>
+            <p>Khi màn hình thu nhỏ xuống dưới <code>768px</code>, thanh menu ngang tự động ẩn và nút Hamburger icon sẽ xuất hiện thay thế bằng <code>display: flex</code>. Bấm vào icon để mở/đóng menu thả xuống.</p>
+        </div>
+    </main>
+
+    <script>
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburgerBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

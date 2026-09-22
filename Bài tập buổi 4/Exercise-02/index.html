@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 2: Adaptive Card Layout</title>
+    <style>
+        :root {
+            --color-primary: #0284c7;
+            --color-primary-light: #e0f2fe;
+            --color-gray-dark: #0f172a;
+            --color-gray-medium: #475569;
+            --color-gray-light: #e2e8f0;
+            --color-bg: #f8fafc;
+            --color-surface: #ffffff;
+
+            --space-unit: 8px;
+            --space-2: calc(var(--space-unit) * 2);
+            --space-3: calc(var(--space-unit) * 3);
+            --space-4: calc(var(--space-unit) * 4);
+
+            --radius-card: 16px;
+            --radius-btn: 8px;
+            --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-gray-dark);
+            padding: var(--space-4) var(--space-2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: min(900px, 100%);
+        }
+
+        .header-title {
+            text-align: center;
+            margin-bottom: var(--space-4);
+        }
+
+        .header-title h1 {
+            font-size: 1.8rem;
+            color: var(--color-gray-dark);
+        }
+
+        .header-title p {
+            color: var(--color-gray-medium);
+            margin-top: 4px;
+            font-size: 1rem;
+        }
+
+        /* Card: Adaptive Layout bằng Flexbox */
+        .adaptive-card {
+            background: var(--color-surface);
+            border-radius: var(--radius-card);
+            border: 1px solid var(--color-gray-light);
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+            display: flex;
+            flex-direction: row; /* Desktop: Ảnh trái - Chữ phải */
+            align-items: stretch;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card-image-wrap {
+            flex: 1 1 45%;
+            min-height: 280px;
+            position: relative;
+        }
+
+        .card-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-content {
+            flex: 1 1 55%;
+            padding: var(--space-4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-tag {
+            align-self: flex-start;
+            background: var(--color-primary-light);
+            color: var(--color-primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 999px;
+            margin-bottom: var(--space-2);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: var(--space-2);
+            line-height: 1.3;
+        }
+
+        .card-desc {
+            color: var(--color-gray-medium);
+            line-height: 1.6;
+            margin-bottom: var(--space-3);
+            font-size: 1rem;
+        }
+
+        .card-btn {
+            align-self: flex-start;
+            background: var(--color-primary);
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--radius-btn);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            min-height: 48px; /* Touch target tối thiểu 48px */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.2s;
+        }
+
+        .card-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Responsive Breakpoint: < 768px (Tablet & Mobile) */
+        @media (max-width: 767px) {
+            .adaptive-card {
+                flex-direction: column; /* Mobile: Ảnh trên - Chữ dưới */
+            }
+
+            .card-image-wrap {
+                min-height: 220px;
+                max-height: 260px;
+            }
+
+            .card-content {
+                padding: var(--space-3);
+            }
+
+            .card-btn {
+                width: 100%; /* Nút bấm full width dễ thao tác ngón tay */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-title">
+            <h1>Adaptive Card Layout</h1>
+            <p>Desktop: Ảnh trái – Chữ phải | Mobile (&lt; 768px): Ảnh trên – Chữ dưới</p>
+        </div>
+
+        <article class="adaptive-card">
+            <div class="card-image-wrap">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Workspace thiết kế giao diện web">
+            </div>
+            <div class="card-content">
+                <span class="card-tag">CSS Flexbox Adaptive</span>
+                <h2 class="card-title">Thiết Kế Web Thích Ứng Mọi Thiết Bị</h2>
+                <p class="card-desc">
+                    Tận dụng thuộc tính <code>flex-direction: row</code> trên Desktop và chuyển sang <code>flex-direction: column</code> trên Mobile. Đảm bảo trải nghiệm trực quan và không bị tràn khung hình.
+                </p>
+                <button type="button" class="card-btn">Khám Phá Ngay</button>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

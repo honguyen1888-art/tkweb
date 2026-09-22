@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoạt động 3 - Debug & Refactor</title>
+    <style>
+        :root {
+            --spacing-unit: 8px;
+            --space-1: var(--spacing-unit);
+            --space-2: calc(var(--spacing-unit) * 2);
+            --space-3: calc(var(--spacing-unit) * 3);
+            --radius: 12px;
+            --bg: #f5f7fb;
+            --surface: #ffffff;
+            --border: #e5e7eb;
+            --text: #1f2937;
+            --muted: #6b7280;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .wrapper {
+            width: min(1000px, calc(100% - 40px));
+            margin: 40px auto;
+        }
+
+        .card {
+            padding: var(--space-3);
+            margin-bottom: var(--space-3);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+
+        h1, h2 {
+            margin-bottom: var(--space-2);
+        }
+
+        .checks {
+            display: grid;
+            gap: var(--space-2);
+        }
+
+        .check {
+            padding: var(--space-2);
+            border-left: 4px solid #2563eb;
+            background: #eff6ff;
+            border-radius: 8px;
+        }
+
+        .code {
+            padding: var(--space-2);
+            background: #111827;
+            color: #e5e7eb;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="card">
+            <h1>Debug & Refactor</h1>
+            <p>Hoạt động 3: Tối ưu mã nguồn CSS do AI sinh ra.</p>
+        </div>
+
+        <div class="card">
+            <h2>1. Tìm thuộc tính trùng lặp</h2>
+            <div class="checks">
+                <div class="check">Gộp các thuộc tính có cùng giá trị.</div>
+                <div class="check">Loại bỏ các thuộc tính mặc định không cần thiết.</div>
+                <div class="check">Không dùng CSS thừa như <strong>float: left</strong>.</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>2. Thay giá trị cứng bằng biến CSS</h2>
+            <div class="code">
+<pre>:root {
+    --spacing-unit: 8px;
+}
+
+.card {
+    margin-bottom: calc(var(--spacing-unit) * 3);
+    padding: calc(var(--spacing-unit) * 3);
+}</pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>3. Dùng Shorthand Properties</h2>
+            <div class="code">
+<pre>/* Cách dài */
+margin-top: 16px;
+margin-right: 16px;
+margin-bottom: 16px;
+margin-left: 16px;
+
+/* Refactor */
+margin: 16px;</pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>4. Evaluation</h2>
+            <p>
+                Dùng Inspect Element (F12) để kiểm tra Box Model,
+                padding, margin và xác nhận không có thuộc tính CSS dư thừa.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

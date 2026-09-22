@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 5: Responsive Image Gallery</title>
+    <style>
+        :root {
+            --color-primary: #0ea5e9;
+            --color-gray-dark: #0f172a;
+            --color-gray-medium: #64748b;
+            --color-gray-light: #e2e8f0;
+            --color-bg: #f8fafc;
+            --color-surface: #ffffff;
+            --space-unit: 8px;
+            --space-2: calc(var(--space-unit) * 2);
+            --space-3: calc(var(--space-unit) * 3);
+            --space-4: calc(var(--space-unit) * 4);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-gray-dark);
+            padding: var(--space-4) var(--space-2);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-title {
+            text-align: center;
+            margin-bottom: var(--space-4);
+        }
+
+        .header-title h1 {
+            font-size: 2rem;
+            margin-bottom: var(--space-1);
+        }
+
+        .header-title p {
+            color: var(--color-gray-medium);
+            font-size: 1rem;
+        }
+
+        /* Gallery tự co giãn cột với auto-fit và minmax(250px, 1fr) */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-3);
+        }
+
+        .gallery-item {
+            background: var(--color-surface);
+            border: 1px solid var(--color-gray-light);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.12);
+        }
+
+        .gallery-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background: #e2e8f0;
+        }
+
+        .gallery-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            padding: var(--space-2);
+            text-align: left;
+        }
+
+        .gallery-caption h3 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+            color: var(--color-gray-dark);
+        }
+
+        .gallery-caption p {
+            font-size: 0.88rem;
+            color: var(--color-gray-medium);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header-title">
+            <h1>Responsive Image Gallery</h1>
+            <p>CSS Grid: <code>grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))</code> tự động chia số cột theo độ rộng màn hình</p>
+        </header>
+
+        <section class="gallery-grid">
+            <article class="gallery-item">
+                <div class="gallery-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Phong cảnh thiên nhiên">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Hồ Núi Thiên Nhiên</h3>
+                    <p>Cảnh sắc thanh bình buổi sớm</p>
+                </div>
+            </article>
+
+            <article class="gallery-item">
+                <div class="gallery-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80" alt="Khu rừng mùa sương">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Rừng Sương Mù</h3>
+                    <p>Khung cảnh huyền ảo và tĩnh lặng</p>
+                </div>
+            </article>
+
+            <article class="gallery-item">
+                <div class="gallery-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=600&q=80" alt="Con đường mùa thu">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Mùa Thu Vàng</h3>
+                    <p>Sắc lá ngập tràn trên lối đi</p>
+                </div>
+            </article>
+
+            <article class="gallery-item">
+                <div class="gallery-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&q=80" alt="Đồi hoa hoàng hôn">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Hoàng Hôn Cao Nguyên</h3>
+                    <p>Ánh nắng chiều tà ấm áp</p>
+                </div>
+            </article>
+        </section>
+    </div>
+</body>
+</html>
