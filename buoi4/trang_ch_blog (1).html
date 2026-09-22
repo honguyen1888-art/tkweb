@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Cá Nhân & Portfolio - Mai Huy Phong</title>
+    <!-- Tránh chớp nháy giao diện khi tải lại trang ở chế độ tối -->
+    <script>
+        (function() {
+            try {
+                var saved = localStorage.getItem('theme');
+                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (saved === 'dark' || (!saved && prefersDark)) {
+                    document.documentElement.classList.add('dark-mode');
+                }
+            } catch(e) {}
+        })();
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Nút chuyển đổi giao diện Sáng / Tối với hiệu ứng icon Mặt Trời <-> Mặt Trăng Khuyết -->
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Chuyển đổi giao diện sáng/tối" title="Đổi giao diện Sáng / Tối">
+        <!-- Icon Mặt trời (Chế độ sáng) -->
+        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5" fill="currentColor"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <!-- Icon Mặt trăng khuyết (Chế độ tối) -->
+        <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+
+    <header>
+        <h1>Mai Huy Phong</h1>
+        <p class="subtitle">Blog & Portfolio chia sẻ về Thiết kế Web</p>
+    </header>
+
+    <main>
+        <!-- HĐ 2: Responsive Portfolio - Bố cục 2 cột trên Desktop -> 1 cột trên Mobile (< 768px) -->
+        <section class="portfolio-grid">
+            <!-- Cột 1: Thông tin cá nhân & Kỹ năng (Sidebar Profile) -->
+            <aside class="card profile-card">
+                <h2>Giới thiệu</h2>
+                <p>Xin chào! Tôi là <strong>Mai Huy Phong</strong>. Đây là trang blog & portfolio cá nhân nơi tôi lưu trữ và chia sẻ những kiến thức cơ bản về môn Thiết kế Web.</p>
+                
+                <div class="skills-box">
+                    <h3>Kỹ năng cốt lõi</h3>
+                    <ul class="skills-list">
+                        <li>HTML5 & Semantic Web</li>
+                        <li>CSS3, Flexbox & CSS Grid</li>
+                        <li>Responsive Web Design</li>
+                        <li>JavaScript Modern ES6+</li>
+                    </ul>
+                </div>
+
+                <div class="contact-box">
+                    <h3>Thông tin liên hệ</h3>
+                    <p class="contact-item">📧 contact@maihuyphong.dev</p>
+                    <p class="contact-item">📍 TP. Hồ Chí Minh, Việt Nam</p>
+                </div>
+            </aside>
+
+            <!-- Cột 2: Nội dung chính môn Thiết kế Web -->
+            <div class="card content-card">
+                <h2>Nội dung cơ bản về Thiết kế Web</h2>
+                
+                <article class="topic">
+                    <h3>1. HTML (HyperText Markup Language)</h3>
+                    <p>Ngôn ngữ đánh dấu siêu văn bản, đóng vai trò tạo nên khung xương và cấu trúc nền tảng cho mọi trang web.</p>
+                </article>
+
+                <article class="topic">
+                    <h3>2. CSS (Cascading Style Sheets)</h3>
+                    <p>Ngôn ngữ quy định kiểu dáng, màu sắc, bố cục và giao diện giúp trang web trở nên trực quan và thu hút hơn.</p>
+                </article>
+
+                <article class="topic">
+                    <h3>3. JavaScript</h3>
+                    <p>Ngôn ngữ lập trình giúp tạo ra các hiệu ứng động, tương tác người dùng và xử lý logic trên trang web.</p>
+                </article>
+
+                <article class="topic">
+                    <h3>4. Responsive Web Design</h3>
+                    <p>Kỹ thuật thiết kế giúp giao diện trang web tự động tối ưu hóa và hiển thị tốt trên mọi thiết bị (máy tính, điện thoại, máy tính bảng).</p>
+                </article>
+
+                <a href="#" class="btn">Đọc thêm bài viết</a>
+            </div>
+        </section>
+
+        <!-- HĐ 3: Breakpoint Challenge - Khu vực "Dịch vụ" 4 cột Desktop -> 2 cột Tablet -> 1 cột Mobile -->
+        <section class="services-section">
+            <h2 class="section-title">Dịch vụ của tôi</h2>
+            <p class="section-subtitle">Các giải pháp thiết kế và phát triển web chuyên nghiệp</p>
+            
+            <div class="services-grid">
+                <!-- Dịch vụ 1 -->
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3>Thiết kế UI/UX</h3>
+                    <p>Thiết kế giao diện trực quan, wireframe và prototype sinh động, tối ưu trải nghiệm người dùng.</p>
+                </div>
+
+                <!-- Dịch vụ 2 -->
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>Lập trình Front-end</h3>
+                    <p>Xây dựng giao diện web chuẩn W3C bằng HTML5, CSS3 và JavaScript hiện đại, mượt mà.</p>
+                </div>
+
+                <!-- Dịch vụ 3 -->
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Tối ưu Responsive</h3>
+                    <p>Tương thích tuyệt đối trên mọi kích thước màn hình từ Desktop, Tablet đến Smartphone.</p>
+                </div>
+
+                <!-- Dịch vụ 4 -->
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Hiệu năng & SEO</h3>
+                    <p>Tối ưu tốc độ tải trang cực nhanh, cấu trúc mã nguồn thân thiện với các công cụ tìm kiếm.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Mai Huy Phong. Tất cả quyền được bảo lưu.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

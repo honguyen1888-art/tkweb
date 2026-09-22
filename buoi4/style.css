@@ -1,0 +1,452 @@
+/* ========================================================
+   HỆ THỐNG THIẾT KẾ (DESIGN SYSTEM) & CSS VARIABLES (HĐ 1 & HĐ 4)
+   ======================================================== */
+:root {
+    /* 1. BẢNG MÀU CHÍNH (HĐ 1: primary, secondary, 3 mức xám, nền) */
+    --primary-color: #078080;         /* Primary: Xanh mòng két teal */
+    --secondary-color: #f45d48;       /* Secondary: Cam san hô nhấn mạnh */
+
+    /* 3 Mức Xám (HĐ 1) */
+    --gray-light: #e5e7eb;            /* Mức xám 1: Xám nhạt (đường kẻ, viền phụ, nền phụ) */
+    --gray-medium: #9ca3af;           /* Mức xám 2: Xám vừa (phụ đề, icon phụ, chú thích) */
+    --gray-dark: #374151;             /* Mức xám 3: Xám đậm (văn bản chính) */
+
+    /* Màu nền & bề mặt (HĐ 1) */
+    --bg-color: #f8f5f2;              /* Nền trang web */
+    --surface-color: #fffffe;         /* Bề mặt / Card nền trắng */
+
+    /* Màu chức năng & tương phản retro */
+    --headline-color: #232323;        /* Màu tiêu đề */
+    --paragraph-color: var(--gray-dark); /* Màu văn bản chính */
+    --stroke-color: #232323;          /* Viền retro nét vẽ */
+    --button-bg: var(--primary-color);
+    --button-text: #ffffff;
+    --main-color: var(--surface-color); /* Đồng bộ tương thích */
+
+    /* 2. HỆ THỐNG KHOẢNG CÁCH (SPACING SYSTEM - HĐ 4) */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+
+    /* 3. BO GÓC & ĐỔ BÓNG (HĐ 4) */
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-full: 9999px;
+
+    --border-width: 2px;
+    --border-width-thick: 3px;
+
+    --shadow-retro-sm: 3px 3px 0px var(--stroke-color);
+    --shadow-retro: 4px 4px 0px var(--stroke-color);
+    --shadow-retro-lg: 6px 6px 0px var(--stroke-color);
+}
+
+/* --- CHẾ ĐỘ TỐI (DARK MODE) (HĐ 1 & HĐ 4) --- */
+:root.dark-mode,
+body.dark-mode {
+    --primary-color: #14b8a6;         /* Teal sáng nổi bật trên nền tối */
+    --secondary-color: #f87171;       /* Đỏ hồng nhấn mạnh */
+
+    /* 3 Mức xám chế độ tối */
+    --gray-light: #334155;            /* Xám nhạt tối (viền nhẹ, ngăn cách) */
+    --gray-medium: #94a3b8;           /* Xám vừa tối (phụ đề) */
+    --gray-dark: #cbd5e1;             /* Xám sáng dễ đọc (văn bản chính) */
+
+    --bg-color: #121820;              /* Nền tổng thể sẫm màu */
+    --surface-color: #1e2633;         /* Nền card sẫm màu */
+
+    --headline-color: #f8fafc;
+    --paragraph-color: var(--gray-dark);
+    --stroke-color: #384556;
+    --button-bg: var(--primary-color);
+    --button-text: #0f172a;
+    --main-color: var(--surface-color);
+
+    --shadow-retro-sm: 3px 3px 0px var(--stroke-color);
+    --shadow-retro: 4px 4px 0px var(--stroke-color);
+    --shadow-retro-lg: 6px 6px 0px var(--stroke-color);
+}
+
+/* --- CÀI ĐẶT CHUNG (RESET & BASE) --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--paragraph-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    padding: var(--spacing-lg) var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- NÚT CHUYỂN ĐỔI SÁNG / TỐI --- */
+.theme-toggle-btn {
+    position: fixed;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    background-color: var(--surface-color);
+    border: var(--border-width-thick) solid var(--stroke-color);
+    box-shadow: var(--shadow-retro-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    outline: none;
+    padding: 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 5px 5px 0px var(--stroke-color);
+}
+
+.theme-toggle-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px var(--stroke-color);
+}
+
+/* Icon chuyển đổi */
+.theme-toggle-btn .theme-icon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+
+/* Trạng thái Sáng: Hiện mặt trời, ẩn mặt trăng khuyết */
+.theme-toggle-btn .sun-icon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+    color: #f59e0b;
+}
+
+.theme-toggle-btn .moon-icon {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0);
+    color: #facc15;
+}
+
+/* Trạng thái Tối: Ẩn mặt trời xoay đi, hiện mặt trăng khuyết xoay vào */
+body.dark-mode .theme-toggle-btn .sun-icon {
+    opacity: 0;
+    transform: rotate(90deg) scale(0);
+}
+
+body.dark-mode .theme-toggle-btn .moon-icon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+/* --- TIÊU ĐỀ & VĂN BẢN --- */
+h1, h2, h3 {
+    color: var(--headline-color);
+    margin-bottom: var(--spacing-sm);
+    transition: color 0.3s ease;
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+h2 {
+    font-size: 1.8rem;
+    border-bottom: var(--border-width) dashed var(--stroke-color);
+    padding-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+h3 {
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+p {
+    margin-bottom: var(--spacing-md);
+    transition: color 0.3s ease;
+}
+
+strong {
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+/* --- HEADER --- */
+header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-md);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+/* --- BỐ CỤC CHÍNH MAIN --- */
+main {
+    max-width: 1080px;
+    width: 100%;
+}
+
+/* --- CARD BÀI VIẾT RETRO --- */
+.card {
+    background-color: var(--surface-color);
+    border: var(--border-width-thick) solid var(--stroke-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-retro-lg);
+    transition: transform 0.2s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ========================================================
+   HĐ 2: RESPONSIVE PORTFOLIO (2 CỘT DESKTOP -> 1 CỘT MOBILE < 768px)
+   ======================================================== */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr; /* Bố cục 2 cột trên Desktop */
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    align-items: start;
+}
+
+/* Cột trái: Profile Sidebar */
+.profile-card {
+    position: sticky;
+    top: var(--spacing-lg);
+}
+
+.skills-box, .contact-box {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px dashed var(--gray-light);
+}
+
+.skills-list {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--spacing-sm);
+}
+
+.skills-list li {
+    background-color: var(--bg-color);
+    border: 1px solid var(--stroke-color);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.skills-list li::before {
+    content: "✓";
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-right: var(--spacing-xs);
+}
+
+.contact-item {
+    font-size: 0.9rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--paragraph-color);
+}
+
+/* Cột phải: Content Card */
+.content-card .topic {
+    background-color: var(--bg-color);
+    border: 1px solid var(--stroke-color);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    border-left: 5px solid var(--secondary-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.content-card .topic p:last-child {
+    margin-bottom: 0;
+}
+
+/* Media Query HĐ 2: Chuyển 2 cột Desktop thành 1 cột trên Mobile < 768px */
+@media (max-width: 768px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr; /* 1 cột trên Mobile */
+        gap: var(--spacing-md);
+    }
+
+    .profile-card {
+        position: static;
+    }
+}
+
+/* ========================================================
+   HĐ 3: BREAKPOINT CHALLENGE: KHU VỰC "DỊCH VỤ"
+   (4 CỘT DESKTOP -> 2 CỘT TABLET -> 1 CỘT MOBILE)
+   ======================================================== */
+.services-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: var(--spacing-xs);
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--gray-medium);
+    margin-bottom: var(--spacing-lg);
+    font-size: 1rem;
+}
+
+/* CSS Grid: 4 cột trên Desktop (> 1024px) */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md);
+}
+
+.service-card {
+    background-color: var(--surface-color);
+    border: var(--border-width) solid var(--stroke-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg) var(--spacing-md);
+    box-shadow: var(--shadow-retro);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, border-color 0.3s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-retro-lg);
+}
+
+.service-icon {
+    font-size: 2.2rem;
+    margin-bottom: var(--spacing-sm);
+    line-height: 1;
+}
+
+.service-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--headline-color);
+}
+
+.service-card p {
+    font-size: 0.9rem;
+    color: var(--paragraph-color);
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+/* Media Query HĐ 3: 2 cột trên Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-md);
+    }
+}
+
+/* Media Query HĐ 3: 1 cột trên Mobile (< 768px) */
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+}
+
+/* --- NÚT BẤM (BUTTON) --- */
+.btn {
+    display: inline-block;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.05rem;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: var(--border-width) solid var(--stroke-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-retro-sm);
+    transition: all 0.2s ease-in-out;
+    margin-top: var(--spacing-xs);
+}
+
+.btn:hover {
+    background-color: var(--secondary-color);
+    color: #ffffff;
+    box-shadow: 5px 5px 0px var(--stroke-color);
+    transform: translate(-2px, -2px);
+}
+
+.btn:active {
+    box-shadow: 0px 0px 0px var(--stroke-color);
+    transform: translate(2px, 2px);
+}
+
+/* --- FOOTER --- */
+footer {
+    text-align: center;
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-md);
+    font-size: 0.9rem;
+    color: var(--paragraph-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+/* --- RESPONSIVE CHUNG CHO MOBILE NHỎ (< 600px) --- */
+@media (max-width: 600px) {
+    body {
+        padding: var(--spacing-md) var(--spacing-sm);
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .theme-toggle-btn {
+        top: var(--spacing-sm);
+        right: var(--spacing-sm);
+        width: 42px;
+        height: 42px;
+    }
+
+    .theme-toggle-btn .theme-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .card {
+        padding: var(--spacing-md);
+    }
+}
