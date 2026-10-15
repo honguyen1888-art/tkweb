@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoạt động 1 - Flex & Grid Battle</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+        header {
+            padding: 32px 20px;
+            text-align: center;
+            background: #111827;
+            color: white;
+        }
+        section {
+            width: min(1100px, calc(100% - 40px));
+            margin: 40px auto;
+        }
+        .flex-demo {
+            height: 420px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #dbeafe, #e0e7ff);
+            border-radius: 16px;
+        }
+        .flex-box {
+            padding: 35px 45px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,.12);
+            text-align: center;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .column {
+            min-height: 180px;
+            padding: 30px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .code {
+            margin-top: 24px;
+            padding: 20px;
+            background: #111827;
+            color: #e5e7eb;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+        @media (max-width: 700px) {
+            .grid-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>FLEX & GRID BATTLE</h1>
+        <p>Hoạt động 1: Căn chỉnh nhanh</p>
+    </header>
+
+    <section>
+        <h2>Flexbox - Căn giữa</h2>
+        <p>Căn giữa một hộp theo chiều ngang và chiều dọc.</p>
+
+        <div class="flex-demo">
+            <div class="flex-box">
+                <h3>Nội dung ở chính giữa</h3>
+                <p>Flexbox đang căn giữa phần tử này.</p>
+            </div>
+        </div>
+
+        <div class="code">
+<pre>.flex-demo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}</pre>
+        </div>
+    </section>
+
+    <section>
+        <h2>CSS Grid - 3 cột bằng nhau</h2>
+        <p>Khoảng cách giữa các cột là 20px.</p>
+
+        <div class="grid-container">
+            <div class="column">Cột 1</div>
+            <div class="column">Cột 2</div>
+            <div class="column">Cột 3</div>
+        </div>
+
+        <div class="code">
+<pre>.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}</pre>
+        </div>
+    </section>
+</body>
+</html>

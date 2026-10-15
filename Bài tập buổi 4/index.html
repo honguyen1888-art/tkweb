@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập Buổi 4: Design System & Responsive Portfolio</title>
+    <style>
+        /* ==========================================================================
+           HỆ THỐNG DESIGN SYSTEM (CSS VARIABLES TẠI :ROOT)
+           - HĐ 1, HĐ 4 & BÀI 1, BÀI 4 ĐƯỢC TÍCH HỢP TRỰC TIẾP VÀO TRANG
+           ========================================================================== */
+        :root {
+            /* 1. Bảng mã màu Light Theme mặc định (HĐ 1 & Bài 4) */
+            --color-primary: #2563eb;          /* Màu chính */
+            --color-primary-hover: #1d4ed8;    /* Màu hover */
+            --color-primary-light: #eff6ff;    /* Màu nền nhạt */
+            --color-primary-subtle: #dbeafe;   /* Sắc thái phụ */
+            
+            --color-secondary: #4f46e5;        /* Màu phụ */
+            --color-secondary-light: #eef2ff;  
+            --color-secondary-border: #c7d2fe; 
+
+            /* 3 Mức Xám */
+            --color-gray-dark: #1f2937;        /* Mức xám đậm (Text chính) */
+            --color-gray-medium: #6b7280;      /* Mức xám vừa (Text phụ, muted) */
+            --color-gray-light: #e5e7eb;       /* Mức xám nhạt (Đường viền) */
+
+            /* Nền & Bề mặt (Surface) */
+            --color-bg: #f5f7fb;               /* Nền toàn trang */
+            --color-surface: #ffffff;          /* Nền thẻ Card / Header */
+            --color-surface-subtle: #fafafa;   /* Nền sub-item */
+            --color-header-bg: #111827;        /* Nền header/sidebar tối */
+            --color-header-text: #ffffff;      
+
+            /* 2. Spacing Tokens (Khoảng cách chuẩn hóa 8px - HĐ 4) */
+            --spacing-unit: 8px;
+            --space-1: var(--spacing-unit);                    /* 8px */
+            --space-2: calc(var(--spacing-unit) * 2);          /* 16px */
+            --space-3: calc(var(--spacing-unit) * 3);          /* 24px */
+            --space-4: calc(var(--spacing-unit) * 4);          /* 32px */
+            --space-5: calc(var(--spacing-unit) * 5);          /* 40px */
+
+            /* 3. Responsive Typography Scale Tokens (Bài 1) */
+            --font-h1: 2.25rem;    /* 36px */
+            --font-h2: 1.75rem;    /* 28px */
+            --font-h3: 1.35rem;    /* 22px */
+            --font-h4: 1.15rem;    /* 18px */
+            --font-body: 1.05rem;  /* ~17px */
+
+            /* Bo góc & Bóng */
+            --radius-sm: 8px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-pill: 9999px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        /* GHI ĐÈ BIẾN TOÀN TRANG KHI BẬT CHẾ ĐỘ TỐI (DARK THEME - BÀI 4) */
+        body.dark-theme {
+            --color-primary: #38bdf8;
+            --color-primary-hover: #0ea5e9;
+            --color-primary-light: rgba(56, 189, 248, 0.15);
+            --color-primary-subtle: rgba(56, 189, 248, 0.25);
+            
+            --color-secondary: #818cf8;
+            --color-secondary-light: rgba(129, 140, 248, 0.15);
+            --color-secondary-border: #4338ca;
+
+            --color-gray-dark: #f3f4f6;        /* Text sáng */
+            --color-gray-medium: #9ca3af;      /* Text mờ */
+            --color-gray-light: #334155;       /* Viền tối */
+
+            --color-bg: #0b0f19;               /* Nền tối sâu */
+            --color-surface: #1e293b;          /* Nền thẻ Card tối */
+            --color-surface-subtle: #162032;
+            --color-header-bg: #0f172a;
+            --color-header-text: #ffffff;
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* RESPONSIVE TYPOGRAPHY SCALE CHO MOBILE < 600PX (BÀI 1) */
+        @media (max-width: 600px) {
+            :root {
+                --font-h1: 1.75rem; /* 28px */
+                --font-h2: 1.4rem;  /* 22.4px */
+                --font-h3: 1.2rem;  /* 19px */
+                --font-h4: 1.05rem; /* 16.8px */
+                --font-body: 1rem;  /* 16px - Đảm bảo tối thiểu 16px trên di động */
+            }
+        }
+
+        /* Reset & Hiệu ứng chuyển màu mượt mà */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-gray-dark);
+            font-size: var(--font-body);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Typography Tags kế thừa trực tiếp thang cỡ chữ */
+        h1 { font-size: var(--font-h1); line-height: 1.25; }
+        h2 { font-size: var(--font-h2); line-height: 1.3; }
+        h3 { font-size: var(--font-h3); line-height: 1.35; }
+        h4 { font-size: var(--font-h4); line-height: 1.4; }
+        p { font-size: var(--font-body); }
+
+        /* ==========================================================================
+           BÀI 3: SMART NAVIGATION BAR TÍCH HỢP TRỰC TIẾP LÀM NAVBAR CỦA TOÀN TRANG
+           - Desktop: Menu ngang đầy đủ, nút Hamburger icon ẩn (display: none)
+           - Mobile (< 768px): Menu ngang ẩn (display: none), Hamburger icon hiện (display: flex)
+           ========================================================================== */
+        .site-navbar {
+            background-color: var(--color-surface);
+            border-bottom: 1px solid var(--color-gray-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-3);
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        /* Menu ngang trên Desktop */
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 6px;
+        }
+
+        .nav-item-link {
+            text-decoration: none;
+            color: var(--color-gray-dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            transition: all 0.2s;
+        }
+
+        .nav-item-link:hover {
+            color: var(--color-primary);
+            background-color: var(--color-primary-light);
+        }
+
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Nút chuyển Dark/Light Mode trực tiếp trên thanh điều hướng (Bài 4) */
+        .theme-toggle-btn {
+            background: var(--color-primary-light);
+            color: var(--color-primary);
+            border: 1px solid var(--color-primary-subtle);
+            border-radius: var(--radius-pill);
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 44px; /* Touch target chuẩn */
+        }
+
+        .theme-toggle-btn:hover {
+            background: var(--color-primary);
+            color: #ffffff;
+        }
+
+        /* Nút Hamburger icon (Mặc định ẩn trên Desktop bằng display: none) */
+        .hamburger-btn {
+            display: none; /* Ẩn trên Desktop */
+            background: none;
+            border: 1px solid var(--color-gray-light);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            min-width: 48px;
+            min-height: 48px; /* Touch target tối thiểu 48px */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            padding: 8px;
+        }
+
+        .hamburger-bar {
+            width: 24px;
+            height: 2.5px;
+            background-color: var(--color-gray-dark);
+            border-radius: 2px;
+            transition: 0.25s;
+        }
+
+        /* Mobile Dropdown Drawer (Bài 3) */
+        .mobile-dropdown-menu {
+            display: none;
+            background-color: var(--color-surface);
+            border-bottom: 2px solid var(--color-gray-light);
+            padding: var(--space-2) var(--space-3);
+            list-style: none;
+        }
+
+        .mobile-dropdown-menu.active {
+            display: block;
+            animation: dropdownSlide 0.25s ease-out;
+        }
+
+        @keyframes dropdownSlide {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .mobile-dropdown-menu li {
+            margin-bottom: 6px;
+        }
+
+        .mobile-dropdown-menu .nav-item-link {
+            display: block;
+            padding: 12px 14px;
+            min-height: 48px;
+            font-size: 1.05rem;
+        }
+
+        /* Responsive Breakpoint Navbar Mobile (< 768px) */
+        @media (max-width: 767px) {
+            .navbar-nav {
+                display: none; /* Ẩn menu ngang Desktop */
+            }
+            .hamburger-btn {
+                display: flex; /* Hiện Hamburger icon */
+            }
+        }
+
+        /* ==========================================================================
+           HĐ 2: RESPONSIVE PORTFOLIO LAYOUT (DESKTOP 2 CỘT -> MOBILE 1 CỘT)
+           ========================================================================== */
+        .portfolio-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: calc(100vh - 68px);
+            display: grid;
+            grid-template-columns: 270px 1fr;
+            grid-template-rows: auto 1fr auto;
+            grid-template-areas:
+                "sidebar main"
+                "sidebar main"
+                "footer footer";
+            gap: var(--space-3);
+            padding: var(--space-3);
+        }
+
+        .portfolio-sidebar {
+            grid-area: sidebar;
+            background: var(--color-surface);
+            border: 1px solid var(--color-gray-light);
+            border-radius: var(--radius-lg);
+            padding: var(--space-3);
+            box-shadow: var(--shadow-sm);
+            height: fit-content;
+            position: sticky;
+            top: 86px;
+        }
+
+        .portfolio-sidebar h3 {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-gray-medium);
+            margin-bottom: var(--space-2);
+        }
+
+        .portfolio-sidebar nav {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .portfolio-sidebar a {
+            text-decoration: none;
+            color: var(--color-gray-dark);
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.92rem;
+            transition: all 0.2s;
+        }
+
+        .portfolio-sidebar a:hover {
+            background-color: var(--color-primary-light);
+            color: var(--color-primary);
+            transform: translateX(4px);
+        }
+
+        .portfolio-main {
+            grid-area: main;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        /* Card Section Component */
+        .card-section {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-gray-light);
+            border-radius: var(--radius-lg);
+            padding: var(--space-4);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .section-badge {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 3px 10px;
+            border-radius: var(--radius-pill);
+            background-color: var(--color-primary-light);
+            color: var(--color-primary);
+            margin-bottom: var(--space-1);
+        }
+
+        .card-section h2 {
+            margin-bottom: var(--space-2);
+            color: var(--color-gray-dark);
+        }
+
+        /* ==========================================================================
+           HĐ 1 & BÀI 4: LIVE THEME & COLOR PICKER PANEL
+           ========================================================================== */
+        .theme-editor-panel {
+            background-color: var(--color-surface-subtle);
+            border: 1px dashed var(--color-primary);
+            border-radius: var(--radius-md);
+            padding: var(--space-3);
+            margin-top: var(--space-3);
+        }
+
+        .presets-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: var(--space-2) 0;
+        }
+
+        .preset-btn {
+            border: 1px solid var(--color-gray-light);
+            background: var(--color-surface);
+            color: var(--color-gray-dark);
+            padding: 6px 14px;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            font-size: 0.82rem;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .preset-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .picker-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: var(--space-2);
+            margin-top: var(--space-2);
+        }
+
+        .picker-item {
+            background: var(--color-surface);
+            border: 1px solid var(--color-gray-light);
+            border-radius: var(--radius-sm);
+            padding: var(--space-2);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .picker-item label {
+            font-size: 0.78rem;
+            font-weight: bold;
+            color: var(--color-gray-dark);
+        }
+
+        .picker-item input[type="color"] {
+            width: 44px;
+            height: 38px;
+            border: 1px solid var(--color-gray-light);
+            border-radius: 6px;
+            cursor: pointer;
+            background: none;
+            padding: 0;
+        }
+
+        /* ==========================================================================
+           HĐ 3: BREAKPOINT CHALLENGE - KHU VỰC "DỊCH VỤ"
+           - Desktop (>1024px): 4 cột
+           - Tablet (768px - 1024px): 2 cột
+           - Mobile (<768px): 1 cột
+           ========================================================================== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 cột Desktop */
+            gap: var(--space-3);
+            margin-top: var(--space-3);
+        }
+
+        .service-item {
+            background: var(--color-surface-subtle);
+            border: 1px solid var(--color-gray-light);
+            border-radius: var(--radius-md);
+            padding: var(--space-3);
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .service-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--color-primary);
+        }
+
+        .service-icon {
+            font-size: 2.2rem;
+            margin-bottom: var(--space-1);
+        }
+
+        /* ==========================================================================
+           BÀI 2: ADAPTIVE CARD LAYOUT TÍCH HỢP THỰC TẾ LÀM THẺ GIỚI THIỆU
+           - Desktop: Ảnh trái - Chữ phải (flex-direction: row)
+           - Mobile (< 768px): Ảnh trên - Chữ dưới (flex-direction: column)
+           ========================================================================== */
+        .adaptive-bio-card {
+            display: flex;
+            flex-direction: row; /* Desktop: Ảnh trái - chữ phải */
+            background: var(--color-surface);
+            border: 1px solid var(--color-gray-light);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            margin-top: var(--space-2);
+        }
+
+        .adaptive-bio-img {
+            flex: 1 1 42%;
+            min-height: 280px;
+        }
+
+        .adaptive-bio-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .adaptive-bio-content {
+            flex: 1 1 58%;
+            padding: var(--space-4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .adaptive-cta-btn {
+            align-self: flex-start;
+            background-color: var(--color-primary);
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            min-height: 48px; /* Touch target chuẩn */
+            margin-top: var(--space-3);
+            transition: opacity 0.2s;
+        }
+
+        .adaptive-cta-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* ==========================================================================
+           BÀI 5: RESPONSIVE IMAGE GALLERY TÍCH HỢP THÀNH MỤC DỰ ÁN HÌNH ẢNH
+           - Dùng repeat(auto-fit, minmax(240px, 1fr)) tự co giãn số cột
+           ========================================================================== */
+        .integrated-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--space-3);
+            margin-top: var(--space-3);
+        }
+
+        .gallery-card-item {
+            background: var(--color-surface-subtle);
+            border: 1px solid var(--color-gray-light);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .gallery-card-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .gallery-card-img {
+            width: 100%;
+            height: 170px;
+            overflow: hidden;
+        }
+
+        .gallery-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-card-item:hover img {
+            transform: scale(1.06);
+        }
+
+        .gallery-card-caption {
+            padding: var(--space-2);
+        }
+
+        .gallery-card-caption h4 {
+            color: var(--color-gray-dark);
+            margin-bottom: 4px;
+        }
+
+        .gallery-card-caption p {
+            font-size: 0.88rem;
+            color: var(--color-gray-medium);
+        }
+
+        /* ==========================================================================
+           BÀI 6: MOBILE-FIRST CONTACT FORM TÍCH HỢP THÀNH FORM LIÊN HỆ CỦA TRANG
+           - Mặc định Mobile 100% width, min-height 48px, font >= 16px
+           - Desktop (>= 768px): Căn giữa, max-width 640px, Họ tên/Email 2 cột
+           ========================================================================== */
+        .site-contact-form {
+            width: 100%;
+            margin-top: var(--space-3);
+        }
+
+        .form-grid-fields {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .form-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-input-group label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--color-gray-dark);
+        }
+
+        .form-input-group input,
+        .form-input-group textarea,
+        .form-input-group select {
+            width: 100%;
+            min-height: 48px;
+            padding: 12px 14px;
+            font-size: 1rem; /* >= 16px tránh phóng to iOS */
+            border: 1.5px solid var(--color-gray-light);
+            border-radius: var(--radius-sm);
+            background-color: var(--color-surface);
+            color: var(--color-gray-dark);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-input-group textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .form-input-group input:focus,
+        .form-input-group textarea:focus,
+        .form-input-group select:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px var(--color-primary-light);
+        }
+
+        .form-submit-btn {
+            width: 100%;
+            min-height: 48px;
+            background-color: var(--color-primary);
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            margin-top: var(--space-1);
+            transition: background-color 0.2s;
+        }
+
+        .form-submit-btn:hover {
+            background-color: var(--color-primary-hover);
+        }
+
+        /* Kỹ năng (Buổi 3 - HĐ 2) Flexbox wrap */
+        .skills-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+            margin-top: var(--space-2);
+        }
+
+        .skill-badge {
+            padding: 8px 16px;
+            background-color: var(--color-secondary-light);
+            border: 1px solid var(--color-secondary-border);
+            color: var(--color-secondary);
+            border-radius: var(--radius-pill);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* Flexbox Căn giữa tuyệt đối (Buổi 3 - HĐ 1) */
+        .battle-flex-center {
+            height: 220px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, var(--color-primary-subtle), var(--color-secondary-light));
+            border-radius: var(--radius-lg);
+            margin-top: var(--space-2);
+        }
+
+        .battle-center-box {
+            padding: var(--space-3) var(--space-4);
+            background: var(--color-surface);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            border: 1px solid var(--color-gray-light);
+        }
+
+        /* Refactor Checklist (HĐ 4 & Buổi 3 - HĐ 3) */
+        .refactor-checklist {
+            display: grid;
+            gap: var(--space-2);
+            margin-top: var(--space-2);
+        }
+
+        .refactor-item {
+            padding: var(--space-2) var(--space-3);
+            border-left: 4px solid var(--color-primary);
+            background: var(--color-primary-light);
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+        }
+
+        .site-footer {
+            grid-area: footer;
+            text-align: center;
+            padding: var(--space-4) var(--space-3);
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-gray-light);
+            color: var(--color-gray-medium);
+            font-size: 0.9rem;
+            border-radius: var(--radius-lg);
+        }
+
+        /* ==========================================================================
+           RESPONSIVE BREAKPOINTS CHUẨN
+           - Tablet (768px - 1024px)
+           - Mobile (< 768px)
+           ========================================================================== */
+
+        /* Tablet Breakpoint (<= 1024px) */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 cột Tablet (HĐ 3) */
+            }
+        }
+
+        /* Mobile Breakpoint (< 768px) */
+        @media (max-width: 767px) {
+            /* Chuyển layout 2 cột Desktop thành 1 cột Mobile (HĐ 2) */
+            .portfolio-wrapper {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "sidebar"
+                    "main"
+                    "footer";
+                padding: var(--space-2);
+            }
+
+            .portfolio-sidebar {
+                position: static;
+            }
+
+            .card-section {
+                padding: var(--space-3);
+            }
+
+            /* Adaptive Card chuyển sang dạng Dọc (Bài 2) */
+            .adaptive-bio-card {
+                flex-direction: column;
+            }
+
+            .adaptive-bio-img {
+                min-height: 200px;
+                max-height: 240px;
+            }
+
+            .adaptive-cta-btn {
+                width: 100%;
+            }
+
+            /* Dịch vụ 1 cột trên Mobile (HĐ 3) */
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .battle-flex-center {
+                height: 180px;
+            }
+        }
+
+        /* Desktop Enhancement cho Form (Bài 6) */
+        @media (min-width: 768px) {
+            .site-contact-form {
+                max-width: 640px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .form-grid-fields-row {
+                display: flex;
+                gap: var(--space-2);
+            }
+
+            .form-grid-fields-row .form-input-group {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================================================
+         BÀI 3: SMART NAVIGATION BAR TÍCH HỢP TRỰC TIẾP
+         - Desktop: Menu ngang đầy đủ | Mobile: Hamburger icon 3 gạch
+         - Kèm nút chuyển Dark/Light Mode toàn trang (Bài 4)
+         ========================================================================== -->
+    <header class="site-navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-brand">
+                <span>Portfolio</span>
+            </a>
+
+            <!-- Menu ngang đầy đủ trên Desktop (ẩn trên mobile bằng display: none) -->
+            <ul class="navbar-nav">
+                <li><a href="#about" class="nav-item-link">Giới thiệu</a></li>
+                <li><a href="#services" class="nav-item-link">Dịch vụ</a></li>
+                <li><a href="#gallery" class="nav-item-link">Dự án Gallery</a></li>
+                <li><a href="#skills" class="nav-item-link">Kỹ năng</a></li>
+                <li><a href="#color-system" class="nav-item-link">Bảng màu</a></li>
+                <li><a href="#contact" class="nav-item-link">Liên hệ</a></li>
+            </ul>
+
+            <div class="navbar-actions">
+                <!-- Nút chuyển đổi giao diện Sáng / Tối toàn trang (Bài 4) -->
+                <button type="button" class="theme-toggle-btn" id="globalThemeToggle" onclick="toggleGlobalTheme()" aria-label="Chuyển đổi giao diện Sáng/Tối">
+                    <span id="themeToggleIcon">🌙</span>
+                    <span id="themeToggleText">Chế độ tối</span>
+                </button>
+
+                <!-- Hamburger Icon trên Mobile (Bài 3) -->
+                <button type="button" class="hamburger-btn" id="mobileHamburgerBtn" onclick="toggleMobileMenu()" aria-label="Mở menu điều hướng">
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu Drawer (Bài 3) -->
+        <ul class="mobile-dropdown-menu" id="mobileDropdownMenu">
+            <li><a href="#about" class="nav-item-link" onclick="toggleMobileMenu()">1. Giới thiệu (Adaptive Card)</a></li>
+            <li><a href="#services" class="nav-item-link" onclick="toggleMobileMenu()">2. Dịch vụ (Breakpoint 4-2-1)</a></li>
+            <li><a href="#gallery" class="nav-item-link" onclick="toggleMobileMenu()">3. Dự án (Responsive Gallery)</a></li>
+            <li><a href="#skills" class="nav-item-link" onclick="toggleMobileMenu()">4. Kỹ năng (Flexbox Wrap)</a></li>
+            <li><a href="#color-system" class="nav-item-link" onclick="toggleMobileMenu()">5. Bảng màu CSS (:root)</a></li>
+            <li><a href="#contact" class="nav-item-link" onclick="toggleMobileMenu()">6. Liên hệ (Mobile-First Form)</a></li>
+        </ul>
+    </header>
+
+    <!-- ==========================================================================
+         HĐ 2: BỐ CỤC PORTFOLIO 2 CỘT DESKTOP -> 1 CỘT MOBILE < 768PX
+         ========================================================================== -->
+    <div class="portfolio-wrapper">
+
+        <!-- Sidebar Navigation -->
+        <aside class="portfolio-sidebar">
+            <h3>Danh Mục Nội Dung</h3>
+            <nav>
+                <a href="#about">1. Giới thiệu (Adaptive Card)</a>
+                <a href="#services">2. Dịch vụ (Breakpoint 4-2-1)</a>
+                <a href="#gallery">3. Dự án (Responsive Gallery)</a>
+                <a href="#skills">4. Kỹ năng (Flexbox Wrap)</a>
+                <a href="#color-system">5. Bảng màu thông minh (:root)</a>
+                <a href="#typography-section">6. Typography Scale</a>
+                <a href="#battle-section">7. Flex & Grid Battle</a>
+                <a href="#refactor-section">8. Refactoring System</a>
+                <a href="#contact">9. Liên hệ (Mobile-First Form)</a>
+            </nav>
+
+        </aside>
+
+        <!-- Nội dung chính -->
+        <main class="portfolio-main">
+
+            <!-- 1. BÀI 2 TÍCH HỢP: ADAPTIVE CARD LAYOUT LÀM MỤC GIỚI THIỆU -->
+            <section class="card-section" id="about">
+                <span class="section-badge">Bài 2 — Adaptive Card Layout</span>
+                <h2>Giới thiệu cá nhân</h2>
+                <p style="color: var(--color-gray-medium); margin-bottom: 12px;">
+                    Thẻ thông tin thích ứng: Hiển thị <strong>ảnh trái – chữ phải</strong> trên Desktop và tự động biến thành <strong>ảnh trên – chữ dưới</strong> trên Mobile (&lt; 768px) nhờ thuộc tính <code>flex-direction</code>.
+                </p>
+
+                <article class="adaptive-bio-card">
+                    <div class="adaptive-bio-img">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Workspace thiết kế giao diện web">
+                    </div>
+                    <div class="adaptive-bio-content">
+                        <span class="section-badge" style="align-self: flex-start; margin-bottom: 8px;">Sinh viên Lập trình Web & AI</span>
+                        <h3>Lê Nhật Duy — Frontend & AI Developer</h3>
+                        <p style="color: var(--color-gray-medium); margin-top: 8px;">
+                            <strong>Lĩnh vực quan tâm:</strong> Phát triển ứng dụng Web, Vibe Coding và Ứng dụng AI.
+                        </p>
+                        <p style="color: var(--color-gray-medium); margin-top: 6px;">
+                            <strong>Mục tiêu:</strong> Nắm vững các tiêu chuẩn nền tảng của Web hiện đại (HTML5 Semantic, CSS3 Design Systems, Responsive), áp dụng quy trình làm việc nhóm chuyên nghiệp với Git và GitHub.
+                        </p>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: var(--space-3);">
+                            <button type="button" class="adaptive-cta-btn" style="margin-top: 0;" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+                                Liên Hệ Hợp Tác
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <!-- 2. HĐ 3: BREAKPOINT CHALLENGE KHU VỰC "DỊCH VỤ" -->
+            <section class="card-section" id="services">
+                <span class="section-badge">HĐ 3 — Breakpoint Challenge</span>
+                <h2>Khu vực Dịch vụ (4 cột Desktop → 2 cột Tablet → 1 cột Mobile)</h2>
+                <p style="color: var(--color-gray-medium);">
+                    Sử dụng CSS Grid kết hợp Media Queries: <strong>4 cột</strong> trên Desktop (&gt;1024px), <strong>2 cột</strong> trên Tablet (768px–1024px) và <strong>1 cột</strong> trên Mobile (&lt;768px).
+                </p>
+
+                <div class="services-grid">
+                    <article class="service-item">
+                        <div class="service-icon">💻</div>
+                        <h3>Thiết Kế Web</h3>
+                        <p style="font-size: 0.9rem; color: var(--color-gray-medium); margin-top: 4px;">Xây dựng giao diện web chuẩn UX/UI hiện đại.</p>
+                    </article>
+
+                    <article class="service-item">
+                        <div class="service-icon">📱</div>
+                        <h3>Responsive Design</h3>
+                        <p style="font-size: 0.9rem; color: var(--color-gray-medium); margin-top: 4px;">Tương thích trơn tru trên mọi màn hình di động.</p>
+                    </article>
+
+                    <article class="service-item">
+                        <div class="service-icon">⚡</div>
+                        <h3>Tối Ưu Tốc Độ</h3>
+                        <p style="font-size: 0.9rem; color: var(--color-gray-medium); margin-top: 4px;">Refactor mã CSS tinh gọn, không thuộc tính dư thừa.</p>
+                    </article>
+
+                    <article class="service-item">
+                        <div class="service-icon">🎨</div>
+                        <h3>Design System</h3>
+                        <p style="font-size: 0.9rem; color: var(--color-gray-medium); margin-top: 4px;">Quản lý biến màu, khoảng cách chuẩn hóa tại :root.</p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- 3. BÀI 5 TÍCH HỢP: RESPONSIVE IMAGE GALLERY LÀM DỰ ÁN TIÊU BIỂU -->
+            <section class="card-section" id="gallery">
+                <span class="section-badge">Bài 5 — Responsive Image Gallery & Buổi 3 HĐ 2</span>
+                <h2>Bộ Sưu Tập Dự Án (CSS Grid Auto-Fit Minmax)</h2>
+                <p style="color: var(--color-gray-medium);">
+                    Ứng dụng <code>grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))</code> giúp các khung ảnh tự động co giãn và chia số cột linh hoạt theo độ rộng trình duyệt mà không làm vỡ tỉ lệ.
+                </p>
+
+                <div class="integrated-gallery-grid">
+                    <div class="gallery-card-item">
+                        <div class="gallery-card-img">
+                            <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80" alt="Website Vé Máy Bay SkyWings">
+                        </div>
+                        <div class="gallery-card-caption">
+                            <h4>Website Đặt Vé Máy Bay (SkyWings)</h4>
+                            <p>Phát triển giao diện Landing Page chuẩn Semantic HTML, phối hợp nhóm qua GitHub.</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-card-item">
+                        <div class="gallery-card-img">
+                            <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80" alt="Personal Portfolio">
+                        </div>
+                        <div class="gallery-card-caption">
+                            <h4>Trang Hồ Sơ Cá Nhân (Personal Portfolio)</h4>
+                            <p>Ứng dụng Vibe Coding xây dựng bản sắc cá nhân chuẩn HTML5 Semantic & CSS3.</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-card-item">
+                        <div class="gallery-card-img">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="Design System & Responsive Hub">
+                        </div>
+                        <div class="gallery-card-caption">
+                            <h4>Design System & Responsive Hub</h4>
+                            <p>CSS Grid & Flexbox, hệ thống biến :root, Dark/Light mode và Mobile-First Form.</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-card-item">
+                        <div class="gallery-card-img">
+                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80" alt="Flex & Grid Battle">
+                        </div>
+                        <div class="gallery-card-caption">
+                            <h4>Flex & Grid Battle</h4>
+                            <p>Thực hành chuyên sâu kỹ thuật căn chỉnh 2 chiều và hệ thống lưới thích ứng.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. KỸ NĂNG (BUỔI 3 HĐ 2 - FLEXBOX WRAP) -->
+            <section class="card-section" id="skills">
+                <span class="section-badge">Buổi 3 — HĐ 2</span>
+                <h2>Kỹ năng lập trình (Flexbox Wrap)</h2>
+                <p style="color: var(--color-gray-medium);">Các thẻ kỹ năng tự động xuống dòng linh hoạt khi màn hình thu nhỏ:</p>
+                
+                <div class="skills-wrap">
+                    <span class="skill-badge">HTML5 Semantic</span>
+                    <span class="skill-badge">CSS Variables (:root)</span>
+                    <span class="skill-badge">Dark / Light Mode Theme</span>
+                    <span class="skill-badge">CSS Grid Layout</span>
+                    <span class="skill-badge">Flexbox Alignment</span>
+                    <span class="skill-badge">Responsive Media Queries</span>
+                    <span class="skill-badge">Mobile-First Form Design</span>
+                    <span class="skill-badge">Git & GitHub</span>
+                </div>
+            </section>
+
+            <!-- 5. HĐ 1 & BÀI 4: BẢNG MÃ MÀU THÔNG MINH (:ROOT) VÀ BỘ CHỈNH MÀU TRỰC TIẾP -->
+            <section class="card-section" id="color-system">
+                <span class="section-badge">HĐ 1 — 30 phút & Bài 4</span>
+                <h2>Bảng mã màu thông minh (CSS Variables tại :root)</h2>
+                <p style="color: var(--color-gray-medium);">
+                    Toàn trang web sử dụng hệ thống biến màu tại <code>:root</code>. Bạn có thể <strong>chọn nhanh Theme có sẵn</strong> hoặc <strong>chọn màu từng ô bên dưới</strong> để trang web tự đổi màu trực tiếp trong thời gian thực:
+                </p>
+
+                <div class="theme-editor-panel">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                        <strong>Chọn bảng màu mẫu (Presets):</strong>
+                        <button type="button" onclick="resetDefaultTheme()" style="background: var(--color-gray-light); color: var(--color-gray-dark); border: none; padding: 4px 12px; border-radius: 4px; font-size: 0.8rem; cursor: pointer; font-weight: bold;">
+                            Khôi phục mặc định
+                        </button>
+                    </div>
+
+                    <div class="presets-row">
+                        <button type="button" class="preset-btn" onclick="applyColorPreset('blue')">
+                            <span style="width:10px; height:10px; background:#2563eb; border-radius:50%; display:inline-block;"></span> Ocean Blue
+                        </button>
+                        <button type="button" class="preset-btn" onclick="applyColorPreset('emerald')">
+                            <span style="width:10px; height:10px; background:#059669; border-radius:50%; display:inline-block;"></span> Emerald Green
+                        </button>
+                        <button type="button" class="preset-btn" onclick="applyColorPreset('purple')">
+                            <span style="width:10px; height:10px; background:#7c3aed; border-radius:50%; display:inline-block;"></span> Royal Purple
+                        </button>
+                        <button type="button" class="preset-btn" onclick="applyColorPreset('sunset')">
+                            <span style="width:10px; height:10px; background:#ea580c; border-radius:50%; display:inline-block;"></span> Sunset Orange
+                        </button>
+                    </div>
+
+                    <div class="picker-grid">
+                        <div class="picker-item">
+                            <label for="colorPickerPrimary">Màu chính (Primary)</label>
+                            <input type="color" id="colorPickerPrimary" value="#2563eb" oninput="changeCssVariable('--color-primary', this.value, 'hexPrimary')">
+                            <span id="hexPrimary" style="font-size:0.75rem; font-family:monospace;">#2563eb</span>
+                        </div>
+
+                        <div class="picker-item">
+                            <label for="colorPickerSecondary">Màu phụ (Secondary)</label>
+                            <input type="color" id="colorPickerSecondary" value="#4f46e5" oninput="changeCssVariable('--color-secondary', this.value, 'hexSecondary')">
+                            <span id="hexSecondary" style="font-size:0.75rem; font-family:monospace;">#4f46e5</span>
+                        </div>
+
+                        <div class="picker-item">
+                            <label for="colorPickerDark">Xám đậm (Chữ chính)</label>
+                            <input type="color" id="colorPickerDark" value="#1f2937" oninput="changeCssVariable('--color-gray-dark', this.value, 'hexDark')">
+                            <span id="hexDark" style="font-size:0.75rem; font-family:monospace;">#1f2937</span>
+                        </div>
+
+                        <div class="picker-item">
+                            <label for="colorPickerMedium">Xám vừa (Chữ phụ)</label>
+                            <input type="color" id="colorPickerMedium" value="#6b7280" oninput="changeCssVariable('--color-gray-medium', this.value, 'hexMedium')">
+                            <span id="hexMedium" style="font-size:0.75rem; font-family:monospace;">#6b7280</span>
+                        </div>
+
+                        <div class="picker-item">
+                            <label for="colorPickerLight">Xám nhạt (Đường viền)</label>
+                            <input type="color" id="colorPickerLight" value="#e5e7eb" oninput="changeCssVariable('--color-gray-light', this.value, 'hexLight')">
+                            <span id="hexLight" style="font-size:0.75rem; font-family:monospace;">#e5e7eb</span>
+                        </div>
+
+                        <div class="picker-item">
+                            <label for="colorPickerBg">Nền trang web (Bg)</label>
+                            <input type="color" id="colorPickerBg" value="#f5f7fb" oninput="changeCssVariable('--color-bg', this.value, 'hexBg')">
+                            <span id="hexBg" style="font-size:0.75rem; font-family:monospace;">#f5f7fb</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. BÀI 1 TÍCH HỢP: RESPONSIVE TYPOGRAPHY SCALE -->
+            <section class="card-section" id="typography-section">
+                <span class="section-badge">Bài 1 — Responsive Typography Scale</span>
+                <h2>Thang cỡ chữ Responsive (Tự giảm khi màn hình &lt; 600px)</h2>
+                <p style="color: var(--color-gray-medium); margin-bottom: 14px;">
+                    Hệ thống phân cấp tiêu đề và văn bản quản lý bằng các biến <code>--font-h1</code> đến <code>--font-body</code> tại <code>:root</code>. Đảm bảo chữ trên điện thoại tối thiểu 16px để người đọc thoải mái nhất.
+                </p>
+
+                <div style="background: var(--color-surface-subtle); border: 1px solid var(--color-gray-light); border-radius: var(--radius-md); padding: var(--space-3);">
+                    <h1>Heading 1 — Tiêu Đề Bài Viết Cấp 1</h1>
+                    <h2 style="color: var(--color-primary); margin-top: 8px;">Heading 2 — Tiêu Đề Mục Cấp 2</h2>
+                    <h3 style="margin-top: 6px;">Heading 3 — Phân Nhánh Nội Dung Cấp 3</h3>
+                    <h4 style="margin-top: 6px; color: var(--color-gray-medium);">Heading 4 — Nhãn Phụ Cấp 4</h4>
+                    <p style="margin-top: 10px; color: var(--color-gray-medium);">
+                        Đoạn văn bản thông thường (thẻ p): Sử dụng <code>line-height: 1.6</code> và <code>font-size: var(--font-body)</code>. Hãy co hẹp cửa sổ &lt;600px để xem thang chữ tự động điều chỉnh tỷ lệ mượt mà!
+                    </p>
+                </div>
+            </section>
+
+            <!-- 7. BUỔI 3 HĐ 1: FLEX & GRID BATTLE -->
+            <section class="card-section" id="battle-section">
+                <span class="section-badge">Buổi 3 — HĐ 1</span>
+                <h2>Flex & Grid Battle: Căn chỉnh nâng cao</h2>
+                
+                <h3 style="font-size: 1.1rem; margin-top: 8px;">1. Flexbox — Căn giữa 2 chiều tuyệt đối</h3>
+                <div class="battle-flex-center">
+                    <div class="battle-center-box">
+                        <h4 style="color: var(--color-primary);">Căn giữa hoàn hảo</h4>
+                        <p style="font-size: 0.88rem; color: var(--color-gray-medium); margin-top: 4px;">display: flex | justify-content: center | align-items: center</p>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 1.1rem; margin-top: 20px;">2. CSS Grid — 3 cột bằng nhau</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-2); margin-top: 8px;">
+                    <div style="background: var(--color-surface-subtle); border: 1px solid var(--color-gray-light); padding: var(--space-3); border-radius: var(--radius-sm); text-align: center; font-weight: bold;">Cột 1</div>
+                    <div style="background: var(--color-surface-subtle); border: 1px solid var(--color-gray-light); padding: var(--space-3); border-radius: var(--radius-sm); text-align: center; font-weight: bold;">Cột 2</div>
+                    <div style="background: var(--color-surface-subtle); border: 1px solid var(--color-gray-light); padding: var(--space-3); border-radius: var(--radius-sm); text-align: center; font-weight: bold;">Cột 3</div>
+                </div>
+            </section>
+
+            <!-- 8. HĐ 4 & BUỔI 3 HĐ 3: DESIGN SYSTEM REFACTORING & DEBUG -->
+            <section class="card-section" id="refactor-section">
+                <span class="section-badge">HĐ 4 — 30 phút & Buổi 3 HĐ 3</span>
+                <h2>Design System Refactoring & Checklist Hoàn Thành</h2>
+                <p style="color: var(--color-gray-medium);">
+                    Toàn bộ mã màu cứng và khoảng cách đã được trích xuất thành biến CSS tại <code>:root</code>:
+                </p>
+
+                <div class="refactor-checklist">
+                    <div class="refactor-item">
+                        <strong>CSS Variables:</strong> 100% mã màu và khoảng cách đều sử dụng <code>var()</code>, thay đổi tại <code>:root</code> là toàn trang tự đổi đồng bộ.
+                    </div>
+                    <div class="refactor-item">
+                        <strong>Dark Theme mượt mà:</strong> Class <code>.dark-theme</code> ghi đè toàn bộ biến màu chỉ với 1 click, transition 0.3s không chớp giật.
+                    </div>
+                    <div class="refactor-item">
+                        <strong>Không cuộn ngang (No Horizontal Scroll):</strong> Thẻ <code>meta viewport</code> đầy đủ, kiểm soát <code>box-sizing: border-box</code> và <code>overflow-x: hidden</code>.
+                    </div>
+                    <div class="refactor-item">
+                        <strong>Accessibility & Touch Target:</strong> Nút bấm, ô nhập, icon menu đạt tối thiểu 48px, chữ tối thiểu 16px trên màn hình di động.
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. BÀI 6 TÍCH HỢP: MOBILE-FIRST CONTACT FORM LÀM FORM LIÊN HỆ CỦA TRANG -->
+            <section class="card-section" id="contact">
+                <span class="section-badge">Bài 6 — Mobile-First Contact Form</span>
+                <h2>Liên hệ hợp tác (Mobile-First Form)</h2>
+                <p style="color: var(--color-gray-medium); text-align: center;">
+                    Mặc định viết cho Mobile trước: ô nhập 100% chiều rộng, touch target &ge; 48px. Khi lên Desktop (&ge; 768px), form tự động giới hạn độ rộng 640px và căn giữa tuyệt đẹp.
+                </p>
+
+                <form class="site-contact-form" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã gửi liên hệ! Form Mobile-First hoạt động chính xác.');">
+                    <div class="form-grid-fields">
+                        <div class="form-grid-fields-row">
+                            <div class="form-input-group">
+                                <label for="formName">Họ và tên *</label>
+                                <input type="text" id="formName" placeholder="Lê Nhật Duy" required>
+                            </div>
+                            <div class="form-input-group">
+                                <label for="formEmail">Địa chỉ Email *</label>
+                                <input type="email" id="formEmail" placeholder="nhatduy@example.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-input-group">
+                            <label for="formService">Chủ đề quan tâm *</label>
+                            <select id="formService">
+                                <option>Tư vấn thiết kế Responsive Web</option>
+                                <option>Xây dựng hệ thống Design System với CSS Variables</option>
+                                <option>Tích hợp chế độ Dark/Light Mode</option>
+                                <option>Tối ưu tốc độ tải trang & UI/UX</option>
+                            </select>
+                        </div>
+
+                        <div class="form-input-group">
+                            <label for="formMsg">Nội dung tin nhắn *</label>
+                            <textarea id="formMsg" placeholder="Nhập nội dung cần trao đổi..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="form-submit-btn">Gửi Tin Nhắn Ngay (Touch Target 48px)</button>
+                    </div>
+                </form>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p><strong>Bài Tập Buổi 4 & Tuần 4 Hoàn Chỉnh</strong> — Design System, CSS Variables, Responsive Portfolio</p>
+            <p style="margin-top: 4px; font-size: 0.8rem;">Tích hợp trọn vẹn cả 4 hoạt động trên lớp + 6 bài tập về nhà tự rèn luyện trên cùng một trang web.</p>
+        </footer>
+
+    </div>
+
+    <!-- ==========================================================================
+         JAVASCRIPT ĐIỀU KHIỂN TƯƠNG TÁC TOÀN TRANG
+         ========================================================================== -->
+    <script>
+        const rootEl = document.documentElement;
+
+        // 1. Chuyển đổi Dark/Light Mode cho TOÀN BỘ TRANG WEB (Bài 4)
+        function toggleGlobalTheme() {
+            const isDark = document.body.classList.toggle('dark-theme');
+            const icon = document.getElementById('themeToggleIcon');
+            const text = document.getElementById('themeToggleText');
+            
+            if (isDark) {
+                if (icon) icon.innerText = '☀️';
+                if (text) text.innerText = 'Chế độ sáng';
+            } else {
+                if (icon) icon.innerText = '🌙';
+                if (text) text.innerText = 'Chế độ tối';
+            }
+        }
+
+        // 2. Mở/đóng Menu Hamburger trên Mobile (Bài 3)
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileDropdownMenu');
+            if (menu) {
+                menu.classList.toggle('active');
+            }
+        }
+
+        // 3. Đổi biến CSS Variables trong thời gian thực (HĐ 1)
+        function changeCssVariable(varName, colorVal, hexDisplayId) {
+            rootEl.style.setProperty(varName, colorVal);
+            if (hexDisplayId) {
+                const el = document.getElementById(hexDisplayId);
+                if (el) el.innerText = colorVal.toLowerCase();
+            }
+
+            // Tự động đồng bộ màu sắc bổ trợ khi đổi màu chính
+            if (varName === '--color-primary') {
+                rootEl.style.setProperty('--color-primary-light', colorVal + '1f');
+                rootEl.style.setProperty('--color-primary-subtle', colorVal + '33');
+            }
+            if (varName === '--color-secondary') {
+                rootEl.style.setProperty('--color-secondary-light', colorVal + '1f');
+                rootEl.style.setProperty('--color-secondary-border', colorVal + '4d');
+            }
+        }
+
+        // 4. Các Theme Presets
+        const themePresets = {
+            blue: {
+                primary: '#2563eb',
+                secondary: '#4f46e5',
+                dark: '#1f2937',
+                medium: '#6b7280',
+                light: '#e5e7eb',
+                bg: '#f5f7fb'
+            },
+            emerald: {
+                primary: '#059669',
+                secondary: '#0d9488',
+                dark: '#132a13',
+                medium: '#4b5563',
+                light: '#d1fae5',
+                bg: '#f0fdf4'
+            },
+            purple: {
+                primary: '#7c3aed',
+                secondary: '#c026d3',
+                dark: '#1e1b4b',
+                medium: '#6b7280',
+                light: '#ede9fe',
+                bg: '#faf5ff'
+            },
+            sunset: {
+                primary: '#ea580c',
+                secondary: '#d97706',
+                dark: '#292524',
+                medium: '#78716c',
+                light: '#fed7aa',
+                bg: '#fff7ed'
+            }
+        };
+
+        function applyColorPreset(presetKey) {
+            const p = themePresets[presetKey];
+            if (!p) return;
+            setPickerVal('colorPickerPrimary', 'hexPrimary', '--color-primary', p.primary);
+            setPickerVal('colorPickerSecondary', 'hexSecondary', '--color-secondary', p.secondary);
+            setPickerVal('colorPickerDark', 'hexDark', '--color-gray-dark', p.dark);
+            setPickerVal('colorPickerMedium', 'hexMedium', '--color-gray-medium', p.medium);
+            setPickerVal('colorPickerLight', 'hexLight', '--color-gray-light', p.light);
+            setPickerVal('colorPickerBg', 'hexBg', '--color-bg', p.bg);
+        }
+
+        function setPickerVal(pickerId, hexId, varName, val) {
+            const el = document.getElementById(pickerId);
+            if (el) el.value = val;
+            changeCssVariable(varName, val, hexId);
+        }
+
+        function resetDefaultTheme() {
+            document.body.classList.remove('dark-theme');
+            const icon = document.getElementById('themeToggleIcon');
+            const text = document.getElementById('themeToggleText');
+            if (icon) icon.innerText = '🌙';
+            if (text) text.innerText = 'Chế độ tối';
+            applyColorPreset('blue');
+        }
+    </script>
+</body>
+</html>
